@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "CadastroClienteAdmin";
+    Layout = "~/Views/Admin/LayoutContaAdmin.cshtml";
+}
+
+    <div>
+
+        <h3>Novo Cliente</h3>
+
+        <form class="form-horizontal" name="form" id="form" method="POST">
+
+            <div class="form-group">
+                <label for="razao-social">Razão Social / Nome</label>
+                <input type="text" class="form-control" name="razaosocial" id="razaosocial" placeholder="Razão Social">
+            </div>
+
+            <div class="form-group">
+                <label for="cnpj">CNPJ</label>
+                <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="CNPJ">
+            </div>
+
+            <div class="form-group">
+                <label for="ramo">Ramo de Atividade</label>
+                <input type="text" class="form-control" name="ramo" id="ramo" placeholder="Ramo de Atividade">
+            </div>
+
+            <div class="form-group">
+                <label for="logradouro">Logradouro</label>
+                <input type="text" class="form-control" name="logradouro" id="logradouro" placeholder="Logradouro">
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="numero">Número</label>
+                    <input type="text" class="form-control" name="numero" id="numero" placeholder="Numero">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="complemento">Complemento</label>
+                    <input type="text" class="form-control" hidden="complemento" id="complemento" placeholder="Complemento">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="cidade">Cidade</label>
+                    <input type="text" class="form-control" name="cidade" id="cidade" placeholder="Cidade">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="estado">Estado</label>
+                    <select class="form-control" name="estado" id="estado">
+                        <option selected>Escolha a cidade</option>
+                        <option>Acre (AC)</option>
+                        <option>Alagoas (AL)</option>
+                        <option>Amapá (AP)</option>
+                        <option>Amazonas (AM)</option>
+                        <option>Bahia (BA)</option>
+                        <option>Ceará (CE)</option>
+                        <option>Distrito Federal (DF)</option>
+                        <option>Espírito Santo (ES)</option>
+                        <option>Goiás (GO)</option>
+                        <option>Maranhão (MA)</option>
+                        <option>Mato Grosso (MT)</option>
+                        <option>Mato Grosso do Sul (MS)</option>
+                        <option>Minas Gerais (MG)</option>
+                        <option>Pará (PA)</option>
+                        <option>Paraíba (PB)</option>
+                        <option>Paraná (PR)</option>
+                        <option>Pernambuco (PE)</option>
+                        <option>Piauí (PI)</option>
+                        <option>Rio de Janeiro (RJ)</option>
+                        <option>Rio Grande do Norte (RN)</option>
+                        <option>Rio Grande do Sul (RS)</option>
+                        <option>Rondônia (RO)</option>
+                        <option>Roraima (RR)</option>
+                        <option>Santa Catarina (SC)</option>
+                        <option>São Paulo (SP)</option>
+                        <option>Sergipe (SE)</option>
+                        <option>Tocantins (TO)</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inputZip">CEP</label>
+                    <input type="text" class="form-control" name="cep" id="cep" placeholder="-">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" id="email" placeholder="Email">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" class="form-control" name="telefone" id="telefone" placeholder="Telefone">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for="observacoes">Observações</label>
+                <textarea class="form-control" name="observacoes" id="observacoes" rows="3"></textarea>
+            </div>
+
+            <button class="btn btn-primary" onclick="salvar()">Cadastrar</button>
+
+        </form>
+
+
+    </div>
+
+
+<script>
+
+
+    function salvar() {
+
+        var data = $("#form").serialize();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("SalvarCliente", "Admin")',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                console.log(data);
+                if (!data.hasOwnProperty("erro")) {
+
+                    window.location.href = '@Url.Action("ConsultaClienteAdmin", "Admin")'
+                }
+                else {
+                    Alert("Erro: ");
+                }
+            }
+        });
+    };
+
+
+
+</script>

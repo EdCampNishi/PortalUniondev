@@ -1,0 +1,86 @@
+﻿<!doctype html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/styles/bootstrap.css">
+    <link rel="stylesheet" href="~/styles/styles.css">
+
+    <script>
+        window.addEventListener("hashchange", function () { scrollBy(0, -100) });
+    </script>
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+
+    <div class="container" id="corpo">
+
+        <!-- Navegação -->
+
+        <div class="container" id="navbar-site">
+
+            <nav class="navbar fixed-top navbar-expand-lg" id="barra-navegacao">
+
+                <div class="container">
+                    <a class="navbar-brand" href="/Home/Index"><img src="~/images/logo.png"></a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSite">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse">
+
+                        <ul class="navbar-nav ml-auto">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index#secao-institucional" id="menulink">SOBRE</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index#secao-servicos" id="menulink">SERVIÇOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index#secao-clientes" id="menulink">CLIENTES</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index#secao-convenios" id="menulink">CONVÊNIOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index#secao-solicite" id="menulink">SOLICITE ATENDIMENTO</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Artigos" id="menulink">ARTIGOS</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index#secao-contato" id="menulink">CONTATO</a>
+                            </li>
+
+                        </ul>
+
+                        <a href="/Conta/Login"><button class="btn btn-primary">Área do Cliente</button></a>
+
+
+                    </div>
+                </div>
+            </nav>
+
+        </div>
+
+        <!-- Conteúdo-->
+
+        <div>
+            @RenderBody()
+        </div>
+
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+</body>
+</html>

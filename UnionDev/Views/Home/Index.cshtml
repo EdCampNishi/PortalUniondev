@@ -1,0 +1,369 @@
+﻿
+@{
+    ViewBag.Title = "CEAP - Gestão de Pessoas";
+    Layout = "LayoutMain.cshtml";
+}
+
+<!-- Seção Carrosel-->
+
+<div id="carouselSite" class="carousel slide" data-ride="carousel">
+
+    <ol class="carousel-indicators">
+        <li data-target="#carouselSite" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselSite" data-slide-to="1"></li>
+        <li data-target="#carouselSite" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <img class="d-block img-fluid" src="~/images/carrosel1.jpg" alt="Primeiro slide">
+            <div class="carousel-caption d-none d-lg-block">
+                <h4>Consultoria e assessoria no desenvolvimento de modelo dinâmico para a Gestão de Pessoas</h4>
+                <p>Competências, Avaliação Psicossocial para as NR 33 e NR35, Coaching, Treinamento e Desenvolvimento</p>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img class="d-block img-fluid" src="http://via.placeholder.com/1920x900" alt="Segundo slide">
+            <div class="carousel-caption d-none d-lg-block">
+                <h4>Segundo slide</h4>
+                <p>Conteudo do segundo slide</p>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <img class="d-block img-fluid" src="http://via.placeholder.com/1920x900" alt="Terceiro slide">
+            <div class="carousel-caption d-none d-lg-block">
+                <h4>Terceiro slide</h4>
+                <p>Conteudo do terceiro slide</p>
+            </div>
+        </div>
+
+    </div>
+
+    <a class="carousel-control-prev" href="#carouselSite" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="carousel-control-next" href="#carouselSite" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
+
+<!-- Seção Institucional-->
+
+<div class="jumbotron jumbotron-fluid" id="secao-institucional">
+
+    <div class="container">
+
+        <div><h4>A Empresa</h4></div>
+
+        <div class="d-flex justify-content-center"><p>O CEAP Gestão de Pessoas presta consultoria e assessoria no desenvolvimento de modelo dinâmico para a Gestão de Pessoas por Competências, Avaliação Psicossocial para as NR 33 e NR35, Coaching, Treinamento e Desenvolvimento.</p></div>
+
+        <br>
+
+        <div><h4>Missão</h4></div>
+
+        <div><p>Promover a gestão de pessoas, com excelência, aplicando metodologias inovadoras avaliando, treinando e desenvolvendo colaboradores nas organizações.</p></div>
+
+        <br>
+
+        <div><h4>Valores</h4></div>
+
+        <div><p>Respeito e Valorização das Pessoas, Ética e Responsabilidade Social.</p></div>
+
+    </div>
+
+</div>
+
+
+<!-- Seção de serviços (divs)-->
+
+<div class="jumbotron jumbotron-fluid" id="secao-servicos">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center"><h3>SERVIÇOS</h3></div>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col mx-1">
+                <a href="/home/Servico_nr7">
+                    <div class="d-flex flex-column">
+                        <img src="~/images/nr7.png" alt="servico" style="align-self: center">
+                        <div>
+                            <p style="text-align: center">Perfil Psicológico NR7</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mx-1">
+                <a href="/home/Servico_coaching">
+                    <div class="d-flex flex-column">
+                        <img src="~/images/coaching.png" alt="coaching executivo" style="align-self: center">
+                        <div>
+                            <p style="text-align: center">Coaching Executivo e de Equipes</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mx-1">
+                <a href="/home/Servico_nr33">
+                    <div class="d-flex flex-column">
+                        <img src="~/images/nr33.png" alt="avaliação NR33" style="align-self: center">
+                        <div>
+                            <p style="text-align: center">Avaliação Psicossocial NR33</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mx-1">
+                <a href="/home/Servico_competencias">
+                    <div class="d-flex flex-column">
+                        <img src="~/images/competencias.png" alt="servico" style="align-self: center">
+                        <div>
+                            <p style="text-align: center">Gestão de Competências</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mx-1">
+                <a href="/home/Servico_nr35">
+                    <div class="d-flex flex-column">
+                        <img src="~/images/nr35.png" alt="servico" style="align-self: center">
+                        <div>
+                            <p style="text-align: center">Avaliação Psicossocial NR35</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col mx-1">
+                <a href="/home/Servico_pessoal">
+                    <div class="d-flex flex-column">
+                        <img src="~/images/pessoal.png" alt="servico" style="align-self: center">
+                        <div>
+                            <p style="text-align: center">Treinamento e Desenvolvimento de Pessoal</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Seção de clientes-->
+
+<div class="jumbotron jumbotron-fluid" id="secao-clientes">
+
+    <div class="container">
+
+        <div><h3>ALGUNS DE NOSSOS CLIENTES</h3></div>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col">
+                <ul style="list-style: none">
+                    <li>Ambev</li>
+                    <li>Hopi Hari</li>
+                    <li>M3 Armazenagem</li>
+                    <li>Mednet</li>
+                    <li>Revimaq</li>
+                    <li>Expresso Cajamar</li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <ul style="list-style: none">
+                    <li>Kraft Foods</li>
+                    <li>M3 Logística</li>
+                    <li>Metacamp</li>
+                    <li>TransBetlin</li>
+                    <li>Transkompa</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Seção de convênios-->
+
+<div class="jumbotron jumbotron-fluid" id="secao-convenios">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center"><h3>CONVÊNIOS</h3></div>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col">
+                <ul style="list-style: none">
+                    <li>Allianz</li>
+                    <li>APCD</li>
+                    <li>CAASP</li>
+                    <li>Coopus</li>
+                    <li>Itaú</li>
+                    <li>Marítima</li>
+                    <li>Multmed</li>
+                    <li>One Health</li>
+                    <li>Portomed</li>
+                    <li>Sul América Saúde</li>
+                    <li>Porto Seguro</li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <ul style="list-style: none">
+                    <li>Amil</li>
+                    <li>Bradesco Saúde</li>
+                    <li>Concard</li>
+                    <li>Intermédica</li>
+                    <li>LINCX</li>
+                    <li>Medial</li>
+                    <li>Notre Dame</li>
+                    <li>SINSEXPRO</li>
+                    <li>Volkswagen</li>
+                    <li>Particulares</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Seção de solicite atendimento-->
+
+<div class="jumbotron jumbotron-fluid" id="secao-solicite">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center"><h3>SOLICITE ATENDIMENTO</h3></div>
+
+        <br>
+
+        <form>
+
+            <div class="form-group">
+                <label for="nome">Nome Completo</label>
+                <input type="text" class="form-control" id="nome" placeholder="Digite seu nome">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" placeholder="Digite seu email">
+            </div>
+
+            <div class="form-group">
+                <label for="telefone">Telefone</label>
+                <input type="tel" class="form-control" id="telefone">
+            </div>
+
+            <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea class="form-control" id="mensagem" rows="6"></textarea>
+            </div>
+        </form>
+
+        <br>
+
+        <div><p>Por questões de Segurança, clique abaixo em "Não sou um robô".</p></div>
+
+        <div class="media">
+            <img src="http://via.placeholder.com/300x150" alt="Captcha">
+        </div>
+
+        <br>
+
+        <div><button type="submit" class="btn btn-secondary">Enviar</button></div>
+
+    </div>
+</div>
+
+<!-- Seção de contato-->
+
+<div class="jumbotron jumbotron-fluid" id="secao-contato">
+
+    <div class="container">
+
+        <div class="d-flex justify-content-center"><h3>CONTATO</h3></div>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <div class="media">
+                        <img src="~/images/telefone.png" alt="telefone">
+                        <div class="media-body align-self-center mt-2">
+                            <p>11 3379-4719<br>11 3379-7425</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    <div class="media">
+                        <img src="~/images/email.png" alt="email">
+                        <div class="media-body align-self-center mt-2">
+                            <p>contato@ceapgestaodepessoas.com.br</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+
+        <div><h5 style="text-align: center">Acesse nossas redes sociais:</h5></div>
+
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                <div class="col" style="align-content: center"><a href="#"><img src="~/images/youtube.png"></a></div>
+                <div class="col" style="align-content: center"><a href="#"><img src="~/images/facebook.png"></a></div>
+                <div class="col" style="align-content: center"><a href="#"><img src="~/images/linkedin.png"></a></div>
+                <div class="col" style="align-content: center"><a href="#"><img src="~/images/instagram.png"></a></div>
+            </div>
+        </div>
+
+        <br>
+
+        <div>
+            <div><h5 style="text-align: center">Endereço:</h5></div>
+            <p style="text-align: center">Rua Anchieta, 204 - sala 506 - Vila Boaventura - Centro - Jundiaí - SP</p>
+            <p style="text-align: center">Telefone: 11 3379-7425</p>
+        </div>
+
+        <br>
+
+        <div class="d-flex justify-content-center">
+            <img class="d-block img-fluid" src="http://via.placeholder.com/920x350" alt="mapa">
+        </div>
+
+    </div>
+
+</div>
