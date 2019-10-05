@@ -54,12 +54,12 @@ namespace UnionDev.Controllers
         }
 
         [HttpPost]
-        public string SalvarCliente(Cliente cliente, Endereco endereco)
+        public void SalvarCliente(Cliente cliente, Endereco endereco)
         {
             cliente.Endereco = endereco;
             ClienteBusiness cliBusiness = new ClienteBusiness();
             JObject cli = cliBusiness.CadastrarCliente(cliente);
-            return cli.ToString();
+            ConsultaClienteAdmin();
         }
 
         [HttpPost]

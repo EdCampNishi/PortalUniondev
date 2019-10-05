@@ -137,7 +137,6 @@
             dataType: 'json',
             data: data,
             success: function (data) {
-                console.log(data);
                 if (!data.hasOwnProperty("erro")) {
 
                     window.location.href = '@Url.Action("ConsultaClienteAdmin", "Admin")'
@@ -148,7 +147,4 @@
             }
         });
     };
-
-
-
 </script>

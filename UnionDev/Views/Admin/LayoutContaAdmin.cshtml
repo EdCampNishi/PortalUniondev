@@ -25,7 +25,7 @@
                 <div class="d-flex flex-row">
                     <div style="margin-right: 30px"><p style="color: white;">Bem vindo, CLIENTE</p></div>
 
-                    <a href="#" class="btn" id="btn-logout">SAIR</a>
+                    <a class="btn" id="btn-logout" onclick="Logout()">SAIR</a>
                 </div>
 
             </div>
@@ -86,5 +86,9 @@
     function BancoClientes() {
         location.href = "@Url.Action("ConsultaClienteAdmin")";
         
+    }
+
+    function Logout() {
+        window.location.href = "@Url.Action("Login", "Conta")";
     }
 </script>

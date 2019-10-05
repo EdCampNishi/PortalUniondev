@@ -21,6 +21,9 @@ namespace UnionDev.Models.BD
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
+        public DbSet<Candidato> Candidatos { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -28,6 +31,8 @@ namespace UnionDev.Models.BD
             modelBuilder.Configurations.Add(new ClienteMAP());
             modelBuilder.Configurations.Add(new EnderecoMAP());
             modelBuilder.Configurations.Add(new FuncionarioMAP());
+            modelBuilder.Configurations.Add(new UsuariosMAP());
+            modelBuilder.Configurations.Add(new CandidatoMAP());
         }
 
         public override int SaveChanges()

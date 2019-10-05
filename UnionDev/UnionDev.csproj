@@ -16,7 +16,7 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44327</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -135,7 +135,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Auditar.cs" />
+    <Compile Include="Models\BD\Mapeamento\CandidatoMAP.cs" />
     <Compile Include="Models\BD\Mapeamento\FuncionarioMAP.cs" />
+    <Compile Include="Models\BD\Mapeamento\UsuariosMAP.cs" />
     <Compile Include="Models\BD\UNIONDEVDataBase.cs" />
     <Compile Include="Models\BD\Factory\ConnectionFactory.cs" />
     <Compile Include="Models\BD\Factory\DataBaseFactory.cs" />
@@ -148,8 +150,11 @@
     <Compile Include="Models\BD\Mapeamento\ClienteMAP.cs" />
     <Compile Include="Models\BD\Mapeamento\EnderecoMAP.cs" />
     <Compile Include="Models\BD\Repositorio\UnitOfWork.cs" />
+    <Compile Include="Models\Candidato.cs" />
     <Compile Include="Models\Cliente.cs" />
-    <Compile Include="Models\Conta.cs" />
+    <Compile Include="Models\ModelsBusiness\CandidatoBusiness.cs" />
+    <Compile Include="Models\ModelsBusiness\UsuariosBusiness.cs" />
+    <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\Funcionario.cs" />
     <Compile Include="Models\ModelsBusiness\ClienteBusiness.cs" />

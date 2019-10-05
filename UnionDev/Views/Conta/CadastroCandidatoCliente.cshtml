@@ -4,54 +4,85 @@
     Layout = "~/Views/Conta/LayoutContaCliente.cshtml";
 }
 
-    <div>
+<div>
 
-        <h3>Novo Candidato</h3>
+    <h3>Novo Candidato</h3>
 
-        <form>
-            <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" class="form-control" id="nome" placeholder="Nome">
+    <form name="form" id="form" method="POST">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="Nome" name="Nome" placeholder="Nome">
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-md-6">
+                <label for="cpf">CPF</label>
+                <input type="text" class="form-control" name="CPF" id="cpf" placeholder="CPF">
             </div>
 
-            <div class="form-row">
-
-                <div class="form-group col-md-6">
-                    <label for="cpf">CPF</label>
-                    <input type="text" class="form-control" id="cpf" placeholder="CPF">
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="nascimento">Data de Nascimento</label>
-                    <input type="date" class="form-control" id="nascimento">
-                </div>
-
-                <div class="form-group col-md-2">
-                    <label for="sexo">Sexo</label>
-                    <select class="form-control" id="sexo">
-                        <option>Masculino</option>
-                        <option>Feminino</option>
-                    </select>
-                </div>
-
+            <div class="form-group col-md-4">
+                <label for="nascimento">Data de Nascimento</label>
+                <input type="date" class="form-control" name="Nascimento" id="nascimento">
             </div>
 
-            <div class="form-row">
-
-                <div class="form-group col-md-6">
-                    <label for="cargo">Cargo / Função</label>
-                    <input type="text" class="form-control" id="cargo" placeholder="Cargo / Função">
-                </div>
-
-                <div class="form-group col-md-6">
-                    <label for="setor">Setor</label>
-                    <input type="text" class="form-control" id="setor" placeholder="Setor">
-                </div>
-
+            <div class="form-group col-md-2">
+                <label for="sexo">Sexo</label>
+                <select class="form-control" name="Sexo" id="sexo">
+                    <option>Masculino</option>
+                    <option>Feminino</option>
+                </select>
             </div>
 
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
 
-        </form>
+        <div class="form-row">
 
-    </div>
+            <div class="form-group col-md-6">
+                <label for="empresa">Empresa</label>
+                <input type="text" class="form-control" name="Empresa" id="empresa" placeholder="Empresa">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="cargo">Cargo / Função</label>
+                <input type="text" class="form-control" id="cargo" name="Cargo" placeholder="Cargo / Função">
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="setor">Setor</label>
+                <input type="text" class="form-control" id="setor" name="Setor" placeholder="Setor">
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary" onclick="salvar()">Cadastrar</button>
+
+    </form>
+
+</div>
+
+
+<script>
+
+
+    function salvar() {
+
+        var data = $("#form").serialize();
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CadastrarCandidato", "Conta")',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                if (!data.hasOwnProperty("erro")) {
+
+                    window.location.href = '@Url.Action("PainelControleCliente", "Conta")'
+                }
+                else {
+                    Alert("Erro: ");
+                }
+            }
+        });
+    };
+</script>

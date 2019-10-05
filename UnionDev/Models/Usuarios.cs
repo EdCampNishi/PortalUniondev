@@ -5,9 +5,12 @@ using System.Web;
 
 namespace UnionDev.Models
 {
-    public class Conta
+    public class Usuarios
     {
-        public string Nome { get; set; }
+        public int Codigo { get; set; }
+        public string Login { get; set; }
         public string Senha { get; set; }
+        public bool Ativo { get; set; }
+
     }
 }

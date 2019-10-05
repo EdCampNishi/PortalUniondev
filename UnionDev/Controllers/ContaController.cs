@@ -5,57 +5,85 @@ using System.Web;
 using System.Web.Mvc;
 using UnionDev.Models;
 using System.Data.SqlClient;
+using UnionDev.Models.ModelsBusiness;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace UnionDev.Controllers
 {
     public class ContaController : Controller
     {
-        SqlConnection con = new SqlConnection();
-        SqlCommand command = new SqlCommand();
-        SqlDataReader dr;
-
         [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
-        void connectionString()
+        public string CriarUsuario(Usuarios usuario)
         {
-                                                                //DEPENDE DO BANCO PARA PROSSEGUIR COM A VALIDAÇÃO
-            con.ConnectionString = @"data source=(nome do servidor); databse=(nome da base) integrated security=(segurança);";
+            UsuariosBusiness usuBusiness = new UsuariosBusiness();
+            var usu = usuBusiness.CriarUsuario(usuario);
+
+            return "ok";
         }
 
-        [HttpPost]
-        public ActionResult Verifica(Conta conta)
+        public string ValidaUsuario(Usuarios usuario)
         {
-            connectionString();
-            con.Open();
-            command.Connection = con;
-            command.CommandText = "SELECT * FROM (TABELA DE LOGIN) WHERE (COLUNA DE LOGIN)='"+conta.Nome+"' AND (COLUNA DE SENHA)='"+conta.Senha+"'";
-            dr = command.ExecuteReader();
-            if (dr.Read())
+            UsuariosBusiness usuBusiness = new UsuariosBusiness();
+            var usu = usuBusiness.ObterUsuario(usuario);
+            if (usu != null)
             {
-                con.Close();
-                return View("Create");
+                return usu.ToString();
             }
-            else
-            {
-                con.Close();
-                return View("Error");
-            }
-
-            
+            return "erro";
         }
+
+        //[HttpPost]
+        //public ActionResult ValidaUsuario(Usuarios usuario)
+        //{
+        //    UsuariosBusiness usuBusiness = new UsuariosBusiness();
+        //    var usu = usuBusiness.ObterUsuario(usuario);
+        //    if (usu != null)
+        //    {
+        //        if (usu.Ativo == true && usu.Codigo != 0)
+        //        {
+        //            return RedirectToAction("CadastroClienteAdmin", "Admin");
+        //        }
+        //    }
+        //    return RedirectToAction("Login");
+        //}
+
 
         public ActionResult PainelControleCliente()
         {
             return View();
         }
 
+
         public ActionResult CadastroCandidatoCliente()
         {
             return View();
+        }
+
+        public string CadastrarCandidato(Candidato candidato)
+        {
+            CandidatoBusiness canBusiness = new CandidatoBusiness();
+            UsuariosBusiness usuBusiness = new UsuariosBusiness();
+            var can = canBusiness.CriarCandidato(candidato);
+            if (can != null)
+            {
+                Usuarios usu = new Usuarios
+                {
+                    Login = can.Nome.Remove(can.Nome.IndexOf(" ")).ToLower(),
+                    Senha = "12345",
+                    Ativo = true
+                };
+                var criaUsu = usuBusiness.CriarUsuario(usu);
+
+                return criaUsu.ToString();
+            }
+
+            return "erro";
         }
     }
 }
