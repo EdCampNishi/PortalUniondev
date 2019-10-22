@@ -97,6 +97,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documentos\TB_CANDIDATOS.sql" />
+    <Content Include="Documentos\TB_CLIENTES.sql" />
+    <Content Include="Documentos\TB_ENDERECO.sql" />
+    <Content Include="Documentos\TB_FUNCIONARIOS.sql" />
+    <Content Include="Documentos\TB_USUARIOS.sql" />
     <Content Include="Global.asax" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\carrosel1.jpg" />
