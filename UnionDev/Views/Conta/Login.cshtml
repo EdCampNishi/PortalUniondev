@@ -56,7 +56,7 @@
 
         $.ajax({            
             url: '@Url.Action("ValidaUsuario", "Conta")',
-            dataType: 'json',
+            dataType: 'json', Encoding.ASCII.GetBytes(usuario.Senha);
             type: 'POST',
             data: data,
             success: function (data) {
