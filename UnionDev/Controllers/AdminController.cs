@@ -53,19 +53,19 @@ namespace UnionDev.Controllers
 
         // MÉTODOS PARA CRUD
         [HttpGet]
-        public string ConsultarTodosClientes()
+        public IList<Cliente> ConsultarTodosClientes()
         {
             ClienteBusiness cliBusiness = new ClienteBusiness();
-            IList<Cliente> cli = cliBusiness.ObterTodosClientes();
-            return cli.ToString();
+            var cli = cliBusiness.ObterTodosClientes();
+            return cli;
         }
 
         [HttpGet]
-        public string ConsultarClientePorId(int id)
+        public JObject ConsultarClientePorId(int id)
         {
             ClienteBusiness cliBusiness = new ClienteBusiness();
-            Cliente cli = cliBusiness.ObterPorId(id);
-            return cli.ToString();
+            JObject cli = cliBusiness.ObterClientePorId(id);
+            return cli;
         }
 
         [HttpPost]
@@ -78,10 +78,10 @@ namespace UnionDev.Controllers
         }
 
         [HttpPost]
-        public string EditarCliente(string codigo)
+        public string EditarCliente(Cliente cliente)
         { 
             ClienteBusiness cliBusiness = new ClienteBusiness();
-            JObject obj = cliBusiness.EditarCliente(int.Parse(codigo));
+            JObject obj = cliBusiness.EditarCliente(cliente);
             return obj.ToString();
         }
 

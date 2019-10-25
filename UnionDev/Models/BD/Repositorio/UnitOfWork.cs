@@ -19,6 +19,7 @@ namespace UnionDev.Models.BD.Repositorio
         private IRepositorio<Models.Funcionario> funcionariosRepositorio = null;
         private IRepositorio<Models.Usuarios> usuariosRepositorio = null;
         private IRepositorio<Models.Candidato> candidatosRepositorio = null;
+        private IRepositorio<Models.Agendamento> agendamentosRepositorio = null;
 
         public UnitOfWork(IContexto contexto)
         {
@@ -98,6 +99,18 @@ namespace UnionDev.Models.BD.Repositorio
                     candidatosRepositorio = new Repositorio<Models.Candidato>(_contexto);
                 }
                 return candidatosRepositorio;
+            }
+        }
+
+        public IRepositorio<Models.Agendamento> AgendamentosRepositorio
+        {
+            get
+            {
+                if (agendamentosRepositorio == null)
+                {
+                    agendamentosRepositorio = new Repositorio<Models.Agendamento>(_contexto);
+                }
+                return agendamentosRepositorio;
             }
         }
 

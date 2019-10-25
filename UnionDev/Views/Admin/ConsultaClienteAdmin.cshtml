@@ -10,14 +10,14 @@
 
     <h3>Clientes</h3>
 
-    <form class="form-horizontal" name="form" id="form" method="POST">
+    <form class="form-horizontal" name="form" id="form">
 
         <div class="form-group">
             <label for="cliente">Cliente</label>
             <input type="text" class="form-control" name="cliente" id="cliente" placeholder="Cliente">
         </div>
 
-        <button class="btn btn-primary" onclick="consultar()">Consultar</button>
+        <button class="btn btn-primary" onclick="Consultar()">Consultar</button>
 
         <div class="panel-body">
             <div id="no-more-tables">
@@ -41,13 +41,12 @@
                                     <td data-title="RAMO">@cliente.Ramo</td>
                                     <td data-title="Ação">
                                         <button class="btn btn-primary" onclick="Remover(@cliente.Codigo)">Deletar</button>
-                                        <button class="btn btn-primary" onclick="AbrirModal()">Editar</button>
+                                        <button type="button" class="btn btn-primary" onclick="AbrirModal(@cliente.Codigo)">Editar</button>
                                     </td>
                                 </tr>
                             }
                         }
                     </tbody>
-
                 </table>
             </div>
         </div>
@@ -66,32 +65,29 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <input hidden name="idM" id="idM" />
                         <label for="razao-social">Razão Social / Nome</label>
-                        <input type="text" class="form-control" name="razaosocial" id="razaosocial" placeholder="Razão Social">
+                        <input type="text" class="form-control" name="razaosocialM" id="razaosocialM" placeholder="Razão Social">
                     </div>
 
                     <div class="form-group">
                         <label for="cnpj">CNPJ</label>
-                        <input type="text" class="form-control" name="cnpj" id="cnpj" placeholder="CNPJ">
+                        <input type="text" class="form-control" name="cnpjM" id="cnpjM" placeholder="CNPJ">
                     </div>
 
                     <div class="form-group">
                         <label for="ramo">Ramo de Atividade</label>
-                        <input type="text" class="form-control" name="ramo" id="ramo" placeholder="Ramo de Atividade">
+                        <input type="text" class="form-control" name="ramoM" id="ramoM" placeholder="Ramo de Atividade">
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                    <button type="button" class="btn btn-primary" onclick="Editar()">Salvar mudanças</button>
                 </div>
             </div>
         </div>
     </div>
-    
-
-
-
 </div>
 
 
@@ -113,25 +109,41 @@
     };
 
 
-    function Editar(cod) {
+    function Editar() {
+        var cod = $("#idM").val();
+        var razaosocial = $("#razaosocialM").val();
+        var cnpj = $("#cnpjM").val();
+        var ramo = $("#ramoM").val();
 
         $.ajax({
             url: "@Url.Action("EditarCliente", "Admin")",
             type: "POST",
             datatype: "json",
-            data: { codigo: cod },
+            data: { codigo: cod, RazaoSocial: razaosocial, CNPJ: cnpj, Ramo: ramo },
             success: function () {
                 location.reload();
             }
         });
     };
 
-    function AbrirModal() {
-
-        $(modal).modal();
+    function AbrirModal(cod) {
+        $('#modal').modal('show');
+        $.ajax({
+            url: "@Url.Action("ConsultarClientePorId", "Admin")",
+            data: { id: cod },
+            type: "GET",
+            success: function (request) {
+                var retorno = JSON.parse(request);
+                console.log(retorno);
+                $("#idM").val(retorno.Codigo);
+                $("#razaosocialM").val(retorno.RazaoSocial);
+                $("#cnpjM").val(retorno.CNPJ);
+                $("#ramoM").val(retorno.Ramo);
+            }
+        })
     };
 
-    function consultar(nome) {
+    function Consultar() {
 
     }
 
