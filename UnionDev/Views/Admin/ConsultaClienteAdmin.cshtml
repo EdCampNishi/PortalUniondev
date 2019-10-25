@@ -47,7 +47,6 @@
                             }
                         }
                     </tbody>
-
                 </table>
             </div>
         </div>
@@ -66,6 +65,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
+                        <input hidden name="idM" id="idM" />
                         <label for="razao-social">Razão Social / Nome</label>
                         <input type="text" class="form-control" name="razaosocialM" id="razaosocialM" placeholder="Razão Social">
                     </div>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                    <button type="button" class="btn btn-primary" onclick="Editar()">Salvar mudanças</button>
                 </div>
             </div>
         </div>
@@ -109,29 +109,36 @@
     };
 
 
-    function Editar(cod) {
+    function Editar() {
+        var cod = $("#idM").val();
+        var razaosocial = $("#razaosocialM").val();
+        var cnpj = $("#cnpjM").val();
+        var ramo = $("#ramoM").val();
 
         $.ajax({
             url: "@Url.Action("EditarCliente", "Admin")",
             type: "POST",
             datatype: "json",
-            data: { codigo: cod },
+            data: { codigo: cod, RazaoSocial: razaosocial, CNPJ: cnpj, Ramo: ramo },
             success: function () {
                 location.reload();
             }
         });
     };
 
-    function AbrirModal(codigo) {
-
+    function AbrirModal(cod) {
         $('#modal').modal('show');
         $.ajax({
             url: "@Url.Action("ConsultarClientePorId", "Admin")",
+            data: { id: cod },
             type: "GET",
-            data: { codigo: codigo },
-            success: function (data) {
-                $("#razaosocialM").val(data.RazaoSocial);
-                $("#cnpjM").val(data.CNPJ);
+            success: function (request) {
+                var retorno = JSON.parse(request);
+                console.log(retorno);
+                $("#idM").val(retorno.Codigo);
+                $("#razaosocialM").val(retorno.RazaoSocial);
+                $("#cnpjM").val(retorno.CNPJ);
+                $("#ramoM").val(retorno.Ramo);
             }
         })
     };

@@ -1,0 +1,225 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<style>
+    .modal-body {
+        max-height: calc(100h - 250px);
+        overflow-y: auto;
+    }
+
+    .input-group {
+        margin-top: 10px;
+    }
+</style>
+<div>
+
+    <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script data-require="moment.js" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/locale/pt-br.js"></script>
+    @*<script src="~/js/calendar.js"></script>*@
+    <link rel="stylesheet" href="~/styles/bootstrap.css" />
+    <script src="/js/bootstrap.min.js"></script>
+    @*<script src="/js/bootstrap-switch.min.js"></script>*@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
+    <link rel="stylesheet" href="~/styles/calendar.css" />
+
+    <div class="col-md-8">
+        <div id="calendar"></div>
+        <div class="background"></div>
+    </div>
+
+
+
+    <div id="modalCalendario" class="modal fade">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="box box-solid">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">Cadastrar Horário</h3>
+
+                                </div>
+
+                                <div class="box-body">
+
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 ">Objetivo</label>
+
+                                        <div class="col-sm-6">
+                                            <input type="hidden" id="hddAgendamento" />
+                                            <input type="hidden" id="data" name="data"/>
+                                            <input type="text" value="" name="objetivo" id="objetivo" class="form-control text-body" data-val="true" />
+                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="objetivo"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 ">Nome</label>
+
+                                        <div class="col-sm-6">
+                                            <input type="text" value="" name="nome" id="nome" class="form-control text-body" data-val="true" />
+                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="nome"></span>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 ">Início</label>
+
+                                        <div class="col-sm-2 bootstrap-datetimepicker-widget">
+                                            <input type="time" value="" name="inicio" id="inicio" class="form-control hora" data-val="true" />
+                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="inicio"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2 ">Fim</label>
+
+                                        <div class="col-sm-2 bootstrap-timepicker timepicker">
+                                            <input type="time" value="" name="fim" id="fim" class="form-control hora" data-val="true" />
+                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="fim"></span>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-default pull-left" data-dismiss="modal">Fechar</a>
+                    <button class="btn btn-default pull-right" onclick="Salvar()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        // Fetch our events
+
+        $('#calendar').fullCalendar({
+
+            lang: 'pt-br',
+
+            events: [
+                {
+                    title: 'All Day Event',
+                    start: '2019-08-01'
+                },
+                {
+                    title: 'Long Event',
+                    start: '2019-08-07',
+                    end: '2019-08-10'
+                },
+                {
+                    groupId: 999,
+                    title: 'Repeating Event',
+                    start: '2019-08-09T16:00:00'
+                },
+                {
+                    groupId: 999,
+                    title: 'Repeating Event',
+                    start: '2019-08-16T16:00:00'
+                },
+                {
+                    title: 'Conference',
+                    start: '2019-08-11',
+                    end: '2019-08-13'
+                },
+                {
+                    title: 'Meeting',
+                    start: '2019-08-12T10:30:00',
+                    end: '2019-08-12T12:30:00'
+                },
+                {
+                    title: 'Lunch',
+                    start: '2019-08-12T12:00:00'
+                },
+                {
+                    title: 'Meeting',
+                    start: '2019-08-12T14:30:00'
+                },
+                {
+                    title: 'Happy Hour',
+                    start: '2019-08-12T17:30:00'
+                },
+                {
+                    title: 'Dinner',
+                    start: '2019-08-12T20:00:00'
+                },
+                {
+                    title: 'Birthday Party',
+                    start: '2019-08-13T07:00:00'
+                },
+                {
+                    title: 'Click for Google',
+                    url: 'http://google.com/',
+                    start: '2019-08-28'
+                }
+            ],
+
+            dayClick: function (date, jsEvent, view) {
+                date = date.format()
+
+                $('.data').val(date)
+                $('.modalCalendario').show()
+                $('.background').show()
+          
+
+            }
+        });
+        $('.background').click(function () {
+            $("#modalCalendario").modal({
+                backdrop: 'static'
+            }, 'show');
+            $('#form').hide()
+            $('.background').hide()
+        })
+
+    });
+
+    function Salvar() {
+        var cod = $("hddAgendamento").val();
+        var objetivo = $('#objetivo').val();
+        var nome = $('#nome').val();
+        var inicio = $('#inicio').val();
+        var fim = $('#fim').val();
+        var date = $('.data').val();
+        $.ajax({
+            url: "@Url.Action("CriarAgendamento", "Cliente")",
+            type: "POST",
+            dataType: "json",
+            data: { Codigo: cod, Objetivo: objetivo, NomeCandidato: nome, HoraInicio: inicio, HoraFim: fim, Data: date },
+            success: function (dados) {
+                var agendamento = JSON.parse(dados);
+                console.log(agendamento);
+            }
+        });
+    };
+
+
+
+</script>
+

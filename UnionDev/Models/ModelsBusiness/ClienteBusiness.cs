@@ -21,14 +21,15 @@ namespace UnionDev.Models.ModelsBusiness
             uow = new UnitOfWork(contexto);
         }
 
-        public Cliente ObterPorId(int id)
+        public JObject ObterClientePorId(int id)
         {
             Cliente cli;
             try
             {
                 cli = uow.ClientesRepositorio.GetByID(id);
+                JObject cliObj = JObject.FromObject(cli);
 
-                return cli;
+                return cliObj;
             }
             catch (Exception ex)
             {
@@ -60,16 +61,17 @@ namespace UnionDev.Models.ModelsBusiness
             return obj;
         }
 
-        public JObject EditarCliente(int codigo)
+        public JObject EditarCliente(Cliente cliente)
         {
             JObject obj = new JObject();
-
-            Cliente cliente = uow.ClientesRepositorio.GetByID(codigo);
+           
 
             if (uow.ClientesRepositorio.Atualizar(cliente))
             {
-                uow.Commit();
-                obj.Add(new JProperty("ok", "ok"));
+                if(uow.Commit())
+                    obj.Add(new JProperty("ok", "ok"));
+                else
+                    obj.Add(new JProperty("erro", uow.GetErro()));
             }
             else
             {
