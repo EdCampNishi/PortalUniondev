@@ -105,10 +105,18 @@
     <Content Include="Global.asax" />
     <Content Include="images\bg.jpg" />
     <Content Include="images\carrosel1.jpg" />
+    <Content Include="images\carrosel2.jpg" />
     <Content Include="images\coaching.png" />
     <Content Include="images\competencias.png" />
+    <Content Include="images\carrosel3.jpg" />
     <Content Include="images\email.png" />
     <Content Include="images\facebook.png" />
+    <Content Include="images\icon-coaching.png" />
+    <Content Include="images\icon-competencias.png" />
+    <Content Include="images\icon-NR33.png" />
+    <Content Include="images\icon-NR35.png" />
+    <Content Include="images\icon-NR7.png" />
+    <Content Include="images\icon-pessoal.png" />
     <Content Include="images\instagram.png" />
     <Content Include="images\linkedin.png" />
     <Content Include="images\logo-interno.png" />
@@ -196,6 +204,13 @@
     <Content Include="Views\Admin\PainelControleAdmin.cshtml" />
     <Content Include="Views\Admin\CadastroClienteAdmin.cshtml" />
     <Content Include="Views\Admin\ConsultaClienteAdmin.cshtml" />
+    <Content Include="Views\Conta\RelatorioCliente.cshtml" />
+    <Content Include="Views\Conta\RelatoriosCliente.cshtml" />
+    <Content Include="Views\Conta\AjudaCliente.cshtml" />
+    <Content Include="Views\Conta\ControleAtendimentoCliente.cshtml" />
+    <Content Include="Views\Admin\RelatoriosAdmin.cshtml" />
+    <Content Include="Views\Admin\AjudaAdmin.cshtml" />
+    <Content Include="Views\Admin\ControleAtendimentosAdmin.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

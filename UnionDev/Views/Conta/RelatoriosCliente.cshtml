@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "RelatoriosCliente";
+    Layout = "~/Views/Conta/LayoutContaCliente.cshtml";
+}
+
+    <div>
+
+        <h3>Relatórios</h3>
+
+        <br />
+
+        <form name="form" id="form" method="POST">
+
+            <h5>Buscar por Data e horário</h5>
+
+            <br />
+
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="nascimento">Data de Exame</label>
+                    <input type="date" class="form-control" name="Data-Exame" id="data-exame">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="mes">Mês</label>
+                    <select class="form-control" name="mes" id="mes">
+                        <option value="null" selected></option>
+                        <option value="janeiro">Janeiro</option>
+                        <option value="fevereiro">Fevereiro</option>
+                        <option value="marco">Março</option>
+                        <option value="abril">Abril</option>
+                        <option value="maio">Maio</option>
+                        <option value="junho">Junho</option>
+                        <option value="julho">Julho</option>
+                        <option value="agosto">Agosto</option>
+                        <option value="setembro">Setembro</option>
+                        <option value="outubro">Outubro</option>
+                        <option value="novembro">Novembro</option>
+                        <option value="dezembro">Dezembro</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="ano">Ano</label>
+                    <input type="text" class="form-control" name="ano" id="ano" placeholder="Ano">
+                </div>
+
+            </div>
+
+            <br />
+
+            <h5>Buscar por Exame</h5>
+
+            <br />
+
+            <div class="form-row">
+
+                <div class="form-group col-md-4">
+                    <label for="tipo-exame">Tipo de Exame</label>
+                    <select class="form-control" name="tipo-exame" id="tipo-exame">
+                        <option value="null" selected></option>
+                        <option value="janeiro">Admissional</option>
+                        <option value="fevereiro">Demissional</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="categoria-exame">Categoria do Exame</label>
+                    <select class="form-control" name="categoria-exame" id="categoria-exame">
+                        <option value="null" selected></option>
+                        <option value="NR33">NR33</option>
+                        <option value="NR35">NR35</option>
+                        <option value="NR7">NR7</option>
+                        <option value="Coaching">Coaching</option>
+                        <option value="competencias">Gestão de Competências</option>
+                        <option value="pessoal">Treinamento e Desenvolvimento Pessoal</option>
+                    </select>
+                </div>
+                
+            </div>
+
+
+            <br />
+
+            <h5>Buscar por Dados do Funcionário</h5>
+
+            <br />
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="Nome" name="Nome" placeholder="Nome">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="cpf">CPF</label>
+                    <input type="text" class="form-control" name="CPF" id="cpf" placeholder="CPF">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="sexo">Sexo</label>
+                    <select class="form-control" name="Sexo" id="sexo">
+                        <option>Masculino</option>
+                        <option>Feminino</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="empresa">Empresa</label>
+                    <input type="text" class="form-control" name="Empresa" id="empresa" placeholder="Empresa">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="cargo">Cargo / Função</label>
+                    <input type="text" class="form-control" id="cargo" name="Cargo" placeholder="Cargo / Função">
+                </div>
+
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="setor">Setor</label>
+                    <input type="text" class="form-control" id="setor" name="Setor" placeholder="Setor">
+                </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary" onclick="salvar()">Pesquisar</button>
+
+        </form>
+
+        <br />
+
+        <br />
+
+        <h5>Resultados</h5>
+
+        <div style="height: 400px; background-color:aquamarine;">
+
+
+        </div>
+
+        <br />
+
+        <button type="submit" class="btn btn-primary" onclick="salvar()">Exportar</button>
+
+    </div>
