@@ -29,7 +29,7 @@
 
     <div class="col-md-8">
         <div id="calendar"></div>
-        <div class="background"></div>
+        @*<div class="background"></div>*@
     </div>
 
 
@@ -182,8 +182,11 @@
 
             dayClick: function (date, jsEvent, view) {
                 date = date.format()
-
-                $('.data').val(date)
+                console.log(date);
+                $("#modalCalendario").modal({
+                    backdrop: 'static'
+                }, 'show');
+                $('#data').val(date)
                 $('.modalCalendario').show()
                 $('.background').show()
           
@@ -191,9 +194,7 @@
             }
         });
         $('.background').click(function () {
-            $("#modalCalendario").modal({
-                backdrop: 'static'
-            }, 'show');
+
             $('#form').hide()
             $('.background').hide()
         })
@@ -206,7 +207,7 @@
         var nome = $('#nome').val();
         var inicio = $('#inicio').val();
         var fim = $('#fim').val();
-        var date = $('.data').val();
+        var date = $('#data').val();
         $.ajax({
             url: "@Url.Action("CriarAgendamento", "Cliente")",
             type: "POST",

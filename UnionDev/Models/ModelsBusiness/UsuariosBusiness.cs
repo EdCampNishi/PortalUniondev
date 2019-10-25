@@ -27,22 +27,27 @@ namespace UnionDev.Models.ModelsBusiness
             JObject obj = new JObject();
             StringBuilder senha = new StringBuilder();
 
-            MD5 md5 = MD5.Create();
-            byte[] entrada = Encoding.ASCII.GetBytes(usuario.Login + "//" + usuario.Senha);
-            byte[] hash = md5.ComputeHash(entrada);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
-            {
-                senha.Append(hash[i].ToString("X2"));
-            }
-            var senhaPassada = senha.ToString();
+            var senhaBytes = usuario.Senha;
+
+            var encrypter = new SHA256Managed();
+            var hash = encrypter.ComputeHash(senhaBytes);
+
+            //MD5 md5 = MD5.Create();
+            //byte[] entrada = Encoding.ASCII.GetBytes(usuario.Login + "//" + usuario.Senha);
+            //byte[] hash = md5.ComputeHash(entrada);
+            //StringBuilder sb = new StringBuilder();
+            //for (int i = 0; i < hash.Length; i++)
+            //{
+            //    senha.Append(hash[i].ToString("X2"));
+            //}
+            //var senhaPassada = senha.ToString();
             try
             {
-                var passBD = uow.UsuariosRepositorio.Get(x => x.Senha == senhaPassada);
+                var passBD = uow.UsuariosRepositorio.Get(x => x.Senha == hash);
                 obj.Add(new JProperty("ok", "ok"));
                 return obj;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -57,15 +62,21 @@ namespace UnionDev.Models.ModelsBusiness
 
             StringBuilder senha = new StringBuilder();
             //pbkdf2
-            MD5 md5 = MD5.Create();
-            byte[] entrada = Encoding.ASCII.GetBytes(usuario.Login + "//" + usuario.Senha);
-            byte[] hash = md5.ComputeHash(entrada);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hash.Length; i++)
-            {
-                senha.Append(hash[i].ToString("X2"));
-            }
-            usuario.Senha = senha.ToString();
+            var senhaBytes = usuario.Senha;
+            var encrypter = new SHA256Managed();
+            var hash = encrypter.ComputeHash(senhaBytes);
+
+
+
+            //MD5 md5 = MD5.Create();
+            //byte[] entrada = Encoding.ASCII.GetBytes(usuario.Login + "//" + usuario.Senha);
+            //byte[] hash = md5.ComputeHash(entrada);
+            //StringBuilder sb = new StringBuilder();
+            //for (int i = 0; i < hash.Length; i++)
+            //{
+            //    senha.Append(hash[i].ToString("X2"));
+            //}
+            usuario.Senha = hash;
             usuario.Ativo = true;
 
             if (uow.UsuariosRepositorio.Adicionar(usuario))

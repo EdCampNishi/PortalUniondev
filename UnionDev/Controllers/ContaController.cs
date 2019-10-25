@@ -75,7 +75,7 @@ namespace UnionDev.Controllers
                 Usuarios usu = new Usuarios
                 {
                     Login = can.Nome.Remove(can.Nome.IndexOf(" ")).ToLower(),
-                    Senha = "12345",
+                    Senha = Encoding.ASCII.GetBytes("12345"),
                     Ativo = true
                 };
                 var criaUsu = usuBusiness.CriarUsuario(usu);
