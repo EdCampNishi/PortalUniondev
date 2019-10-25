@@ -65,6 +65,21 @@ namespace UnionDev.Controllers
             return View();
         }
 
+        public ActionResult RelatoriosCliente()
+        {
+            return View();
+        }
+
+        public ActionResult AjudaCliente()
+        {
+            return View();
+        }
+
+        public ActionResult ControleAtendimentoCliente()
+        {
+            return View();
+        }
+
         public string CadastrarCandidato(Candidato candidato)
         {
             CandidatoBusiness canBusiness = new CandidatoBusiness();

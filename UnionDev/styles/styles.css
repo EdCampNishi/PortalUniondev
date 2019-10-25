@@ -1,3 +1,7 @@
+.form-group{
+    font-size:small;
+}
+
 #barra-interno {
     background-color: #4E0800;
     margin-bottom: 10px;
@@ -52,12 +56,26 @@
     margin: 0;
 }
 
-#pagina-servicos{
+#conteudo-interno {
+    display: table;
     background-color: white;
+    height: 100%;
     margin: 0;
 }
 
-#area-login{
+#pagina-servicos {
+    display: table;
+    background-color: white;
+    height: 100%;
+    margin: 0;
+}
+
+#container-servicos {
+    display: table-row;
+    height: 100%;
+}
+
+#area-login {
     background-color: white;
     margin: 0;
 }
@@ -72,6 +90,8 @@ h3 {
 body{
     padding-top: 100px;
 }
+
+
 
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)

@@ -27,6 +27,21 @@ namespace UnionDev.Controllers
             return View();
         }
 
+        public ActionResult RelatoriosAdmin()
+        {
+            return View();
+        }
+
+        public ActionResult AjudaAdmin()
+        {
+            return View();
+        }
+
+        public ActionResult ControleAtendimentosAdmin()
+        {
+            return View();
+        }
+
         public ActionResult ConsultaClienteAdmin()
         {
             ClienteBusiness clienteBusiness = new ClienteBusiness();
