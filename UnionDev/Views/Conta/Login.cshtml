@@ -10,7 +10,7 @@
 
         <br>
 
-        <form  name="form" id="form" method="POST">
+        <form name="form" id="form" method="POST">
 
             <div class="form-group col-md-6">
                 <label for="login">Login</label>
@@ -52,19 +52,15 @@
 
     function Logar() {
 
-        var data = $("#form").serialize();
 
-        $.ajax({            
-            url: '@Url.Action("ValidaUsuario", "Conta")',
-            dataType: 'json', Encoding.ASCII.GetBytes(usuario.Senha);
+        $.ajax({
+            url: '@Url.Action("Login", "Conta")',
+            dataType: 'json',
             type: 'POST',
-            data: data,
+            data: {Login: $("#login").val(), Senha: $("#senha").val()},
             success: function (data) {
-                console.log(data);
-                if (!data.hasOwnProperty("erro")) {
-                    window.location.href = '@Url.Action("PainelControleAdmin", "Admin")';
-                }
-
+                var usuario = JSON.parse(data)
+                console.log(usuario);
             }
         });
     }

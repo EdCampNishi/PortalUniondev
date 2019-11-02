@@ -20,6 +20,7 @@ namespace UnionDev.Models.BD.Repositorio
         private IRepositorio<Models.Usuarios> usuariosRepositorio = null;
         private IRepositorio<Models.Candidato> candidatosRepositorio = null;
         private IRepositorio<Models.Agendamento> agendamentosRepositorio = null;
+        private IRepositorio<Models.Permissao> permissoesRepositorio = null;
 
         public UnitOfWork(IContexto contexto)
         {
@@ -114,7 +115,19 @@ namespace UnionDev.Models.BD.Repositorio
             }
         }
 
-        
+        public IRepositorio<Models.Permissao> PermissoesRepositorio
+        {
+            get
+            {
+                if (permissoesRepositorio == null)
+                {
+                    permissoesRepositorio = new Repositorio<Models.Permissao>(_contexto);
+                }
+                return permissoesRepositorio;
+            }
+        }
+
+
 
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)

@@ -24,6 +24,7 @@ namespace UnionDev.Models.BD
         public DbSet<Usuarios> Usuarios { get; set; }
         public DbSet<Candidato> Candidatos { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
+        public DbSet<Permissao> Permissao { get; set; }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -35,6 +36,7 @@ namespace UnionDev.Models.BD
             modelBuilder.Configurations.Add(new UsuariosMAP());
             modelBuilder.Configurations.Add(new CandidatoMAP());
             modelBuilder.Configurations.Add(new AgendamentoMAP());
+            modelBuilder.Configurations.Add(new PermissaoMAP());
         }
 
         public override int SaveChanges()

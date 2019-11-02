@@ -75,7 +75,7 @@
             dataType: 'json',
             data: data,
             success: function (data) {
-                if (!data.hasOwnProperty("erro")) {
+                if (!data.hasOwnProperty("nok")) {
 
                     window.location.href = '@Url.Action("PainelControleCliente", "Conta")'
                 }

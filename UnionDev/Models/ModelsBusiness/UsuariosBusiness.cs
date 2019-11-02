@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,33 +28,31 @@ namespace UnionDev.Models.ModelsBusiness
             JObject obj = new JObject();
             StringBuilder senha = new StringBuilder();
 
-            var senhaBytes = usuario.Senha;
+            var senhaBytes = Encoding.ASCII.GetBytes(usuario.Senha);
 
             var encrypter = new SHA256Managed();
             var hash = encrypter.ComputeHash(senhaBytes);
 
-            //MD5 md5 = MD5.Create();
-            //byte[] entrada = Encoding.ASCII.GetBytes(usuario.Login + "//" + usuario.Senha);
-            //byte[] hash = md5.ComputeHash(entrada);
-            //StringBuilder sb = new StringBuilder();
-            //for (int i = 0; i < hash.Length; i++)
-            //{
-            //    senha.Append(hash[i].ToString("X2"));
-            //}
-            //var senhaPassada = senha.ToString();
             try
             {
-                var passBD = uow.UsuariosRepositorio.Get(x => x.Senha == hash);
-                obj.Add(new JProperty("ok", "ok"));
-                return obj;
+                var passBD = uow.UsuariosRepositorio.Get(x => x.SenhaCriptografada == hash);
+                if (passBD != null)
+                {
+                    obj.Add(new JProperty("Status", "ok"));
+                    obj.Add(new JProperty("Permissao", passBD.PermissaoCodigo));
+                    
+                    return obj;
+                }
+                return null;
             }
             catch (Exception ex)
             {
-                return null;
+                obj.Add(new JProperty("Status", "erro"));
+                return obj;
             }
 
-                
-            
+
+
         }
 
         public JObject CriarUsuario(Usuarios usuario)
@@ -62,7 +61,7 @@ namespace UnionDev.Models.ModelsBusiness
 
             StringBuilder senha = new StringBuilder();
             //pbkdf2
-            var senhaBytes = usuario.Senha;
+            byte[] senhaBytes = Encoding.ASCII.GetBytes(usuario.Senha);
             var encrypter = new SHA256Managed();
             var hash = encrypter.ComputeHash(senhaBytes);
 
@@ -74,16 +73,16 @@ namespace UnionDev.Models.ModelsBusiness
             //StringBuilder sb = new StringBuilder();
             //for (int i = 0; i < hash.Length; i++)
             //{
-            //    senha.Append(hash[i].ToString("X2"));
+            //    senha.Append(hash[i].ToString());
             //}
-            usuario.Senha = hash;
+            usuario.SenhaCriptografada = hash;
             usuario.Ativo = true;
 
             if (uow.UsuariosRepositorio.Adicionar(usuario))
             {
                 if (uow.Commit())
                 {
-                    obj.Add(new JProperty("ok", "ok"));
+                    obj.Add(new JProperty("status", "ok"));
                     return obj;
                 }
                 else

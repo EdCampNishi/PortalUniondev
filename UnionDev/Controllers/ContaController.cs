@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using UnionDev.Models.ModelsBusiness;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace UnionDev.Controllers
 {
@@ -19,6 +20,16 @@ namespace UnionDev.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Login(Usuarios usuario)
+        {
+            var validacao = ValidaUsuario(usuario);
+            if (validacao != null)
+                return RedirectToAction("PainelControleAdmin", "Admin");
+            else
+                return RedirectToAction("Login");
+        }
+
         public string CriarUsuario(Usuarios usuario)
         {
             UsuariosBusiness usuBusiness = new UsuariosBusiness();
@@ -27,15 +38,17 @@ namespace UnionDev.Controllers
             return "ok";
         }
 
-        public string ValidaUsuario(Usuarios usuario)
+        public JObject ValidaUsuario(Usuarios usuario)
         {
+            AdminController contrl = new AdminController();
             UsuariosBusiness usuBusiness = new UsuariosBusiness();
             var usu = usuBusiness.ObterUsuario(usuario);
             if (usu != null)
             {
-                return usu.ToString();
+                return usu;
             }
-            return "erro";
+            else
+                return null;
         }
 
         //[HttpPost]
@@ -80,8 +93,9 @@ namespace UnionDev.Controllers
             return View();
         }
 
-        public string CadastrarCandidato(Candidato candidato)
+        public JObject CadastrarCandidato(Candidato candidato)
         {
+            JObject retornoCriação = new JObject();
             CandidatoBusiness canBusiness = new CandidatoBusiness();
             UsuariosBusiness usuBusiness = new UsuariosBusiness();
             var can = canBusiness.CriarCandidato(candidato);
@@ -89,16 +103,16 @@ namespace UnionDev.Controllers
             {
                 Usuarios usu = new Usuarios
                 {
-                    Login = can.Nome.Remove(can.Nome.IndexOf(" ")).ToLower(),
-                    Senha = Encoding.ASCII.GetBytes("12345"),
+                    Login = candidato.CPF,
+                    Senha = "12345",
                     Ativo = true
                 };
-                var criaUsu = usuBusiness.CriarUsuario(usu);
-
-                return criaUsu.ToString();
+                var usuarioCriado = usuBusiness.CriarUsuario(usu);
+                if (usuarioCriado["status"].ToString() == "ok") 
+                    return usuarioCriado;
             }
-
-            return "erro";
+            retornoCriação.Add(new JProperty("status", "nok"));
+            return retornoCriação;
         }
     }
 }

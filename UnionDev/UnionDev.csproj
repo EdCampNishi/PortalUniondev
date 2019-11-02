@@ -328,6 +328,7 @@
     <Compile Include="Models\BD\Mapeamento\AgendamentoMAP.cs" />
     <Compile Include="Models\BD\Mapeamento\CandidatoMAP.cs" />
     <Compile Include="Models\BD\Mapeamento\FuncionarioMAP.cs" />
+    <Compile Include="Models\BD\Mapeamento\PermissaoMAP.cs" />
     <Compile Include="Models\BD\Mapeamento\UsuariosMAP.cs" />
     <Compile Include="Models\BD\UNIONDEVDataBase.cs" />
     <Compile Include="Models\BD\Factory\ConnectionFactory.cs" />
@@ -345,7 +346,9 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\ModelsBusiness\AgendamentoBusiness.cs" />
     <Compile Include="Models\ModelsBusiness\CandidatoBusiness.cs" />
+    <Compile Include="Models\ModelsBusiness\PermissaoBusiness.cs" />
     <Compile Include="Models\ModelsBusiness\UsuariosBusiness.cs" />
+    <Compile Include="Models\Permissao.cs" />
     <Compile Include="Models\Usuarios.cs" />
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\Funcionario.cs" />
@@ -384,7 +387,6 @@
     <Content Include="Views\Admin\CadastroClienteAdmin.cshtml" />
     <Content Include="Views\Admin\ConsultaClienteAdmin.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
-    <Content Include="Views\Cliente\Agenda.cshtml" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

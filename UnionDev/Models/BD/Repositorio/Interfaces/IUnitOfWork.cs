@@ -15,6 +15,7 @@ namespace UnionDev.Models.BD.Repositorio.Interfaces
         IRepositorio<Models.Usuarios> UsuariosRepositorio { get; }
         IRepositorio<Models.Candidato> CandidatosRepositorio { get; }
         IRepositorio<Models.Agendamento> AgendamentosRepositorio { get; }
+        IRepositorio<Models.Permissao> PermissoesRepositorio { get; }
         string GetErro();
     }
 }
