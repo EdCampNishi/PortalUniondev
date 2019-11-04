@@ -1,6 +1,7 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "AgendaConsulta";
+    //Layout = "~/Views/Cliente/LayoutContaCliente.cshtml";
 
 }
 
@@ -61,7 +62,7 @@
 
                                         <div class="col-sm-6">
                                             <input type="hidden" id="hddAgendamento" />
-                                            <input type="hidden" id="data" name="data"/>
+                                            <input type="hidden" id="data" name="data" />
                                             <input type="text" value="" name="objetivo" id="objetivo" class="form-control text-body" data-val="true" />
                                             <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="objetivo"></span>
 
@@ -80,23 +81,14 @@
 
 
                                     <div class="form-group">
-                                        <label class="control-label col-sm-2 ">Início</label>
+                                        <label class="control-label col-sm-2 ">Horários</label>
+                                        <ul>
+                                            @*@foreach(var horas in horariosDisponiveis)
+                                            {
 
-                                        <div class="col-sm-2 bootstrap-datetimepicker-widget">
-                                            <input type="time" value="" name="inicio" id="inicio" class="form-control hora" data-val="true" />
-                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="inicio"></span>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2 ">Fim</label>
-
-                                        <div class="col-sm-2 bootstrap-timepicker timepicker">
-                                            <input type="time" value="" name="fim" id="fim" class="form-control hora" data-val="true" />
-                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="fim"></span>
-
-                                        </div>
+                                            }*@
+                                            <li><a class="btn" name="horarios"></a></li>
+                                        </ul>
                                     </div>
 
 
@@ -116,98 +108,87 @@
 
 
 <script>
+    //Executa assim que carrega a página
     $(document).ready(function () {
         // Fetch our events
+        var agenda = [];
 
-        $('#calendar').fullCalendar({
+        //Envia uma requisição para Consultar todos Eventos cadastrados
+        $.ajax({
+            url: '@Url.Action("ConsultaAgendaGeral", "Cliente")',
+            type: 'GET',
+            success: function (data) {
+                agenda = JSON.parse(data);
 
-            lang: 'pt-br',
+                $('#calendar').fullCalendar({
 
-            events: [
-                {
-                    title: 'All Day Event',
-                    start: '2019-08-01'
-                },
-                {
-                    title: 'Long Event',
-                    start: '2019-08-07',
-                    end: '2019-08-10'
-                },
-                {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2019-08-09T16:00:00'
-                },
-                {
-                    groupId: 999,
-                    title: 'Repeating Event',
-                    start: '2019-08-16T16:00:00'
-                },
-                {
-                    title: 'Conference',
-                    start: '2019-08-11',
-                    end: '2019-08-13'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2019-08-12T10:30:00',
-                    end: '2019-08-12T12:30:00'
-                },
-                {
-                    title: 'Lunch',
-                    start: '2019-08-12T12:00:00'
-                },
-                {
-                    title: 'Meeting',
-                    start: '2019-08-12T14:30:00'
-                },
-                {
-                    title: 'Happy Hour',
-                    start: '2019-08-12T17:30:00'
-                },
-                {
-                    title: 'Dinner',
-                    start: '2019-08-12T20:00:00'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: '2019-08-13T07:00:00'
-                },
-                {
-                    title: 'Click for Google',
-                    url: 'http://google.com/',
-                    start: '2019-08-28'
-                }
-            ],
+                    //Traduz para o Portugues Br
+                    lang: 'pt-br',
+                    //Mostra os Eventos Agendado em Tela 
+                    events: agenda,
 
-            dayClick: function (date, jsEvent, view) {
-                date = date.format()
-                console.log(date);
-                $("#modalCalendario").modal({
-                    backdrop: 'static'
-                }, 'show');
-                $('#data').val(date)
-                $('.modalCalendario').show()
-                $('.background').show()
-          
+                    //Evento ao clicar sobre a data
+                    dayClick: function (date, jsEvent, view) {
+                        date = date.format()
+                        var now = new Date();
+                        var today = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
 
+                        if (Date.parse(date) > Date.parse(today)) {
+
+                            //Verifica com o metodo ValidaEventosPorDia. Se existir mais do que 3 eventos, não pode marcar outro.
+                            if (ValidaEventosPorDia(date) == "ok") {
+
+                                $("#horarios").val()
+
+                                //Abre modal para inserção de dados
+                                $("#modalCalendario").modal({
+                                    backdrop: 'static'
+                                }, 'show');
+                                $('#data').val(date)
+                                $('.modalCalendario').show()
+                                $('.background').show()
+
+                            }
+                            else {
+                               
+                                alert("Não é mais possível marcar consulta nesta data.");
+                            }
+                        }
+                    }
+                });
+
+                $('.background').click(function () {
+
+                    $('#form').hide()
+                    $('.background').hide()
+                })
             }
         });
-        $('.background').click(function () {
-
-            $('#form').hide()
-            $('.background').hide()
-        })
-
     });
 
+
+    function ValidaEventosPorDia(data) {
+        var retorno = $.ajax({
+            url: '@Url.Action("ValidaQuantidadeConsultaPorDia", "Cliente")',
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            data: { date: data }
+        });
+
+        return retorno.responseText;
+    };
+
+
+    //Salvaa consulta em Banco
     function Salvar() {
         var cod = $("hddAgendamento").val();
         var objetivo = $('#objetivo').val();
         var nome = $('#nome').val();
-        var inicio = $('#inicio').val();
-        var fim = $('#fim').val();
+        var inicio = $('#horarios').val();
+        var fim = "18:00"
         var date = $('#data').val();
+
         $.ajax({
             url: "@Url.Action("CriarAgendamento", "Cliente")",
             type: "POST",

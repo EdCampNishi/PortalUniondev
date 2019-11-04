@@ -11,8 +11,11 @@ namespace UnionDev.Models
         public string NomeCandidato { get; set; }
         public string Objetivo { get; set; }
         public DateTime Data { get; set; }
-        public string HoraInicio { get; set; }
-        public string HoraFim { get; set; }
+        public TimeSpan HoraInicio { get; set; }
+        public TimeSpan HoraFim { get; set; }
         public string Descricao { get; set; }
+        public bool Pendente { get; set; }
+        public bool Cancelado { get; set; }
+        public bool Concluido { get; set; }
     }
 }

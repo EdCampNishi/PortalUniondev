@@ -10,7 +10,8 @@
 
         <br>
 
-        <form name="form" id="form" method="POST">
+        @using (Html.BeginForm("Login", "Conta", FormMethod.Post))
+        {
 
             <div class="form-group col-md-6">
                 <label for="login">Login</label>
@@ -33,7 +34,7 @@
 
             <button class="btn btn-primary" onclick="Logar()">Login</button>
 
-        </form>
+         }
     </div>
 
 
@@ -59,10 +60,10 @@
             type: 'POST',
             data: {Login: $("#login").val(), Senha: $("#senha").val()},
             success: function (data) {
-                var usuario = JSON.parse(data)
-                console.log(usuario);
+                alert("@ViewBag.Message");
             }
         });
+
     }
 
     function myFunction() {

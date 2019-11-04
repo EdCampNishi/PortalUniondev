@@ -20,6 +20,35 @@ namespace UnionDev.Models.ModelsBusiness
         }
 
 
+        public JArray ConsultaAgendamentoGeral()
+        {
+            JArray arr = new JArray();
+
+            var consultadas = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Cancelado == false && x.Concluido == false).ToList();
+            foreach(var consulta in consultadas)
+            {
+                arr.Add(new JObject(new JProperty("title", consulta.Objetivo),
+                                    new JProperty("start", consulta.Data)));
+            };
+            return arr;
+        }
+
+        public List<TimeSpan> ConsultaHorarios(DateTime date)
+        {
+            var consultas = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Data == date).Select(x=>x.HoraInicio).ToList();
+            List<TimeSpan> horarios = new List<TimeSpan>()
+            {
+                new TimeSpan(08,00,00),
+                new TimeSpan(10,00,00),
+                new TimeSpan(14,00,00),
+                new TimeSpan(16,00,00)
+            };
+
+            horarios.RemoveAll(x => consultas.Equals(horarios));
+
+            return horarios;
+        }
+
         public Agendamento SalvarAgendamento(Agendamento agendamento)
         {
 
@@ -34,6 +63,9 @@ namespace UnionDev.Models.ModelsBusiness
                     consultado.NomeCandidato = agendamento.NomeCandidato;
                     consultado.Objetivo = agendamento.Objetivo;
                     consultado.Descricao = agendamento.Descricao;
+                    consultado.Pendente = true;
+                    consultado.Cancelado = false;
+                    consultado.Concluido = false;
 
                     if (uow.AgendamentosRepositorio.Atualizar(consultado))
                     {
@@ -59,6 +91,14 @@ namespace UnionDev.Models.ModelsBusiness
                 return null;
             }
             return null;
+        }
+
+        public IList<Agendamento> ConsultaPorDia(DateTime data)
+        {
+            IList<Agendamento> listaConsultas = null;
+            if (data != null)
+                listaConsultas = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Data == data).ToList();
+            return listaConsultas;
         }
     }
 }

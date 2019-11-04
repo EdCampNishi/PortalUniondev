@@ -379,14 +379,14 @@
     <Content Include="Views\Home\Servico_competencias.cshtml" />
     <Content Include="Views\Home\Servico_nr35.cshtml" />
     <Content Include="Views\Home\Servico_pessoal.cshtml" />
-    <Content Include="Views\Conta\LayoutContaCliente.cshtml" />
+    <Content Include="Views\Cliente\LayoutContaCliente.cshtml" />
     <Content Include="Views\Conta\PainelControleCliente.cshtml" />
-    <Content Include="Views\Conta\CadastroCandidatoCliente.cshtml" />
+    <Content Include="Views\Cliente\CadastroCandidatoCliente.cshtml" />
     <Content Include="Views\Admin\LayoutContaAdmin.cshtml" />
     <Content Include="Views\Admin\PainelControleAdmin.cshtml" />
     <Content Include="Views\Admin\CadastroClienteAdmin.cshtml" />
     <Content Include="Views\Admin\ConsultaClienteAdmin.cshtml" />
-    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\AgendaConsulta.cshtml" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

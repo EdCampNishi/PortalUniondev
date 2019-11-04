@@ -21,13 +21,20 @@ namespace UnionDev.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Login(Usuarios usuario)
         {
             var validacao = ValidaUsuario(usuario);
             if (validacao != null)
-                return RedirectToAction("PainelControleAdmin", "Admin");
+                if(int.Parse(validacao["Permissao"].ToString()) == 1 )
+                    return RedirectToAction("PainelControleAdmin", "Admin");
+                else
+                    return RedirectToAction("Index", "Cliente");
             else
-                return RedirectToAction("Login");
+            {
+                ViewBag.Message = "Usuário Inválido.";
+                return View(usuario);
+            }
         }
 
         public string CriarUsuario(Usuarios usuario)
@@ -67,52 +74,10 @@ namespace UnionDev.Controllers
         //}
 
 
-        public ActionResult PainelControleCliente()
-        {
-            return View();
-        }
 
 
-        public ActionResult CadastroCandidatoCliente()
-        {
-            return View();
-        }
 
-        public ActionResult RelatoriosCliente()
-        {
-            return View();
-        }
 
-        public ActionResult AjudaCliente()
-        {
-            return View();
-        }
 
-        public ActionResult ControleAtendimentoCliente()
-        {
-            return View();
-        }
-
-        public JObject CadastrarCandidato(Candidato candidato)
-        {
-            JObject retornoCriação = new JObject();
-            CandidatoBusiness canBusiness = new CandidatoBusiness();
-            UsuariosBusiness usuBusiness = new UsuariosBusiness();
-            var can = canBusiness.CriarCandidato(candidato);
-            if (can != null)
-            {
-                Usuarios usu = new Usuarios
-                {
-                    Login = candidato.CPF,
-                    Senha = "12345",
-                    Ativo = true
-                };
-                var usuarioCriado = usuBusiness.CriarUsuario(usu);
-                if (usuarioCriado["status"].ToString() == "ok") 
-                    return usuarioCriado;
-            }
-            retornoCriação.Add(new JProperty("status", "nok"));
-            return retornoCriação;
-        }
     }
 }
