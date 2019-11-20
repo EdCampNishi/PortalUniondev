@@ -30,13 +30,17 @@ namespace UnionDev.Controllers
             AgendamentoBusiness agendamento = new AgendamentoBusiness();
             IList<Agendamento> listaAgenda = agendamento.ConsultaPorDia(date);
 
-            //TODO TROCAR O MÉTODO DE LUGAR!!!!!!!!!!
-            var horariosDisporniveis = agendamento.ConsultaHorarios(date);
-
             if (listaAgenda.Count < 3)
                 return "ok";
             else
                 return null;
+        }
+
+        public JArray VerificaHorarioDisponivel(DateTime data)
+        {
+            AgendamentoBusiness agendamento = new AgendamentoBusiness();
+            var horariosDisporniveis = agendamento.ConsultaHorarios(data);
+            return horariosDisporniveis;
         }
 
         public ActionResult PainelControleCliente()
@@ -71,12 +75,12 @@ namespace UnionDev.Controllers
         }
 
         [HttpPost]
-        public Models.Agendamento CriarAgendamento(Models.Agendamento agendamento)
+        public ActionResult CriarAgendamento(Models.Agendamento agendamento)
         {
             Models.ModelsBusiness.AgendamentoBusiness agBusiness = new Models.ModelsBusiness.AgendamentoBusiness();
             Models.Agendamento ag = agBusiness.SalvarAgendamento(agendamento);
 
-            return ag;
+            return RedirectToAction("ControleAtendimentoCliente");
         }
 
         public JObject CadastrarCandidato(Candidato candidato)

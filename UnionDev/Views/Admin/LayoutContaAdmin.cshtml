@@ -39,10 +39,10 @@
         <div class="container">
             <div class="row">
 
-                <div class="col-md-auto">
+                <div class="col-md-3">
                     <div class="btn-group-vertical">
                         <a href="/Admin/PainelControleAdmin" class="btn btn-primary">Painel de Controle</a>
-                        <a href="#" class="btn btn-primary">Agenda</a>
+                        <a href="#" class="btn btn-primary" onclick="TelaAgenda()">Agenda</a>
                         <a href="/Admin/CadastroClienteAdmin" class="btn btn-primary">Cadastro de Clientes</a>
                         <a href="#" class="btn btn-primary" onclick="BancoClientes()">Banco de Clientes</a>
                         <a href="#" class="btn btn-primary">Banco de Candidatos</a>
@@ -54,7 +54,7 @@
 
                 <!-- Conteúdo-->
 
-                <div class="col">
+                <div class="col-md-9">
                     <div>
                         @RenderBody()
                     </div>
@@ -88,4 +88,9 @@
     function Logout() {
         window.location.href = "@Url.Action("Login", "Conta")";
     }
+
+    function TelaAgenda() {
+        window.location.href = "@Url.Action("AgendaConsulta", "Cliente")"
+    }
+
 </script>

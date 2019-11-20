@@ -14,10 +14,12 @@
 
         <div class="form-group">
             <label for="cliente">Cliente</label>
-            <input type="text" class="form-control" name="cliente" id="cliente" placeholder="Cliente">
+            <div class="input-group">
+                <input type="text" class="form-control col-lg-8" name="cliente" id="cliente" placeholder="Cliente">
+                <button type="button" class="btn btn-primary pull-right" onclick="Consultar()" style="margin-left:5px;">Consultar</button>
+            </div>
         </div>
 
-        <button class="btn btn-primary" onclick="Consultar()">Consultar</button>
 
         <div class="panel-body">
             <div id="no-more-tables">
@@ -142,10 +144,6 @@
             }
         })
     };
-
-    function Consultar() {
-
-    }
 
 
 

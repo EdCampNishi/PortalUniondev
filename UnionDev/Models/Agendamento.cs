@@ -12,7 +12,6 @@ namespace UnionDev.Models
         public string Objetivo { get; set; }
         public DateTime Data { get; set; }
         public TimeSpan HoraInicio { get; set; }
-        public TimeSpan HoraFim { get; set; }
         public string Descricao { get; set; }
         public bool Pendente { get; set; }
         public bool Cancelado { get; set; }

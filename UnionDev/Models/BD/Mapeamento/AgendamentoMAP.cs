@@ -21,7 +21,6 @@ namespace UnionDev.Models.BD.Mapeamento
             Property(x => x.Objetivo).HasColumnName("AGE_OBJETIVO");
             Property(x => x.Data).HasColumnName("AGE_DATA");
             Property(x => x.HoraInicio).HasColumnName("AGE_INICIO");
-            Property(x => x.HoraFim).HasColumnName("AGE_FIM");
             Property(x => x.Descricao).HasColumnName("AGE_DESCRICAO");
             Property(x => x.Pendente).HasColumnName("AGE_PENDENTE");
             Property(x => x.Cancelado).HasColumnName("AGE_CANCELADO");

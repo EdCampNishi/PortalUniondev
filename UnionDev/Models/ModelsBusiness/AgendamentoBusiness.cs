@@ -25,7 +25,7 @@ namespace UnionDev.Models.ModelsBusiness
             JArray arr = new JArray();
 
             var consultadas = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Cancelado == false && x.Concluido == false).ToList();
-            foreach(var consulta in consultadas)
+            foreach (var consulta in consultadas)
             {
                 arr.Add(new JObject(new JProperty("title", consulta.Objetivo),
                                     new JProperty("start", consulta.Data)));
@@ -33,9 +33,11 @@ namespace UnionDev.Models.ModelsBusiness
             return arr;
         }
 
-        public List<TimeSpan> ConsultaHorarios(DateTime date)
+        public JArray ConsultaHorarios(DateTime date)
         {
-            var consultas = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Data == date).Select(x=>x.HoraInicio).ToList();
+            JArray arr = new JArray();
+
+            var consultas = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Data == date).Select(x => x.HoraInicio).ToList();
             List<TimeSpan> horarios = new List<TimeSpan>()
             {
                 new TimeSpan(08,00,00),
@@ -44,9 +46,23 @@ namespace UnionDev.Models.ModelsBusiness
                 new TimeSpan(16,00,00)
             };
 
-            horarios.RemoveAll(x => consultas.Equals(horarios));
+            var horariosDisponiveis = new List<TimeSpan>();
+            
+            foreach (var hora in horarios)
+            {
+                if (!consultas.Contains(hora))
+                {
+                    horariosDisponiveis.Add(hora);
+                }
+            }
 
-            return horarios;
+
+            foreach (var hora in horariosDisponiveis)
+            {
+                arr.Add(new JObject(new JProperty("hora", hora)));
+            }
+
+            return arr;
         }
 
         public Agendamento SalvarAgendamento(Agendamento agendamento)
@@ -59,7 +75,6 @@ namespace UnionDev.Models.ModelsBusiness
                 {
                     consultado.Data = agendamento.Data;
                     consultado.HoraInicio = agendamento.HoraInicio;
-                    consultado.HoraFim = agendamento.HoraFim;
                     consultado.NomeCandidato = agendamento.NomeCandidato;
                     consultado.Objetivo = agendamento.Objetivo;
                     consultado.Descricao = agendamento.Descricao;
@@ -80,6 +95,7 @@ namespace UnionDev.Models.ModelsBusiness
             }
             else
             {
+                agendamento.Pendente = true;
                 if (uow.AgendamentosRepositorio.Adicionar(agendamento))
                 {
                     if (!uow.Commit())

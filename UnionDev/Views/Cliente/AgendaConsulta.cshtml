@@ -4,6 +4,17 @@
     //Layout = "~/Views/Cliente/LayoutContaCliente.cshtml";
 
 }
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/styles/bootstrap.css">
+    <link rel="stylesheet" href="~/styles/styles.css">
+
+    <title>CEAP Gestão de Pessoas</title>
+</head>
 
 <style>
     .modal-body {
@@ -15,99 +26,158 @@
         margin-top: 10px;
     }
 </style>
-<div>
-
-    <script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script data-require="moment.js" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/locale/pt-br.js"></script>
-    @*<script src="~/js/calendar.js"></script>*@
-    <link rel="stylesheet" href="~/styles/bootstrap.css" />
-    <script src="/js/bootstrap.min.js"></script>
-    @*<script src="/js/bootstrap-switch.min.js"></script>*@
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
-    <link rel="stylesheet" href="~/styles/calendar.css" />
-
-    <div class="col-md-8">
-        <div id="calendar"></div>
-        @*<div class="background"></div>*@
-    </div>
 
 
 
-    <div id="modalCalendario" class="modal fade">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+<script data-require="jquery" data-semver="3.1.1" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script data-require="moment.js" data-semver="2.14.1" src="https://npmcdn.com/moment@2.14.1"></script>
+@*<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.js"></script>*@
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/locale/pt-br.js"></script>*@
+@*<script src="~/js/calendar.js"></script>*@
+<link rel="stylesheet" href="~/styles/bootstrap.css" />
+<script src="/js/bootstrap.min.js"></script>
+<script src="~/Scripts/fullcalendar/fullcalendar.min.js"></script>
+<script src="~/Scripts/fullcalendar/locale/pt-br.js"></script>
+@*<script src="/js/bootstrap-switch.min.js"></script>*@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.3.0/fullcalendar.min.css" />
+<link rel="stylesheet" href="~/styles/calendar.css" />
+
+<body style="background-color:white">
+    <div>
+
+        <div class="container" id="navbar-site">
+
+            <!-- Barra -->
+
+            <nav class="navbar fixed-top navbar-expand-lg" id="barra-interno">
+
+                <div class="container">
+                    <a class="navbar-brand" href="#"><img src="~/images/logo-interno.png"></a>
+
+                    <div class="d-flex flex-row">
+                        <div style="margin-right: 30px"><p style="color: white;">Bem vindo, CLIENTE</p></div>
+
+                        <a href="#" class="btn" id="btn-logout">SAIR</a>
+                    </div>
+
+                </div>
+            </nav>
+
+            <div style="height: 40px"></div>
+
+            <!-- Menu Lateral-->
+
+
+            <div class="container" style="margin-top:60px;">
+                <div class="row" id="row-main">
+
+                    <div class="col-md-3" id="sidebar">
+                        <div class="btn-group-vertical">
+                            <a href="/Conta/PainelControleCliente" class="btn btn-primary">Painel de Controle</a>
+                            <a href="#" class="btn btn-primary">Agendar Exame</a>
+                            <a href="/Conta/CadastroCandidatoCliente" class="btn btn-primary">Cadastro de Candidatos/Colaborador</a>
+                            <a href="#" class="btn btn-primary">Banco de Candidatos/Colaborador</a>
+                            <a href="/Conta/ControleAtendimentoCliente" class="btn btn-primary">Controle de Atendimentos</a>
+                            <a href="/Conta/RelatoriosCliente" class="btn btn-primary">Relatórios</a>
+                            <a href="/Conta/AjudaCliente" class="btn btn-primary">Ajuda</a>
+                        </div>
+                    </div>
+
+                    <!-- Conteúdo-->
+
+                    <div class="col-md-9" id="content">
+                        <div>
+                            <div class="pull-right">
+
+                                <div id="calendar"></div>
+                                @*<div class="background"></div>*@
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="box box-solid">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Cadastrar Horário</h3>
 
-                                </div>
-
-                                <div class="box-body">
+            </div>
+        </div>
 
 
 
 
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2 ">Objetivo</label>
 
-                                        <div class="col-sm-6">
-                                            <input type="hidden" id="hddAgendamento" />
-                                            <input type="hidden" id="data" name="data" />
-                                            <input type="text" value="" name="objetivo" id="objetivo" class="form-control text-body" data-val="true" />
-                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="objetivo"></span>
+
+        <div id="modalCalendario" class="modal fade">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="box box-solid">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title">Cadastrar Horário</h3>
+
+                                    </div>
+
+                                    <div class="box-body">
+
+
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2 ">Objetivo</label>
+
+                                            <div class="col-sm-6">
+                                                <input type="hidden" id="hddAgendamento" />
+                                                <input type="hidden" id="data" name="data" />
+                                                <input type="text" value="" name="objetivo" id="objetivo" class="form-control text-body" data-val="true" />
+                                                <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="objetivo"></span>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2 ">Nome</label>
+
+                                            <div class="col-sm-6">
+                                                <input type="text" value="" name="nome" id="nome" class="form-control text-body" data-val="true" />
+                                                <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="nome"></span>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-3 ">Horários Disponíveis:</label>
+
+                                            <button class="btn-info btn-sm" name="oito" id="oito" value="08:00" onclick="SalvarHorario(this)">08:00</button>
+                                            <button class="btn-info btn-sm" name="dez" id="dez" value="10:00" onclick="SalvarHorario(this)">10:00</button>
+                                            <button class="btn-info btn-sm" name="quatorze" id="quatorze" value="14:00" onclick="SalvarHorario(this)">14:00</button>
+                                            <button class="btn-info btn-sm" name="dezesseis" id="dezesseis" value="16:00" onclick="SalvarHorario(this)">16:00</button>
 
                                         </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2 ">Nome</label>
-
-                                        <div class="col-sm-6">
-                                            <input type="text" value="" name="nome" id="nome" class="form-control text-body" data-val="true" />
-                                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="nome"></span>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label class="control-label col-sm-2 ">Horários</label>
-                                        <ul>
-                                            @*@foreach(var horas in horariosDisponiveis)
-                                            {
-
-                                            }*@
-                                            <li><a class="btn" name="horarios"></a></li>
-                                        </ul>
-                                    </div>
-
-
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-default pull-left" data-dismiss="modal">Fechar</a>
-                    <button class="btn btn-default pull-right" onclick="Salvar()">Salvar</button>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary pull-left" data-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary pull-right" onclick="Salvar()">Salvar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+</body>
 
 <script>
+    var horario = '';
     //Executa assim que carrega a página
     $(document).ready(function () {
         // Fetch our events
@@ -119,13 +189,12 @@
             type: 'GET',
             success: function (data) {
                 agenda = JSON.parse(data);
-
                 $('#calendar').fullCalendar({
-
                     //Traduz para o Portugues Br
                     lang: 'pt-br',
-                    //Mostra os Eventos Agendado em Tela 
+                    //Mostra os Eventos Agendado em Tela
                     events: agenda,
+
 
                     //Evento ao clicar sobre a data
                     dayClick: function (date, jsEvent, view) {
@@ -138,7 +207,12 @@
                             //Verifica com o metodo ValidaEventosPorDia. Se existir mais do que 3 eventos, não pode marcar outro.
                             if (ValidaEventosPorDia(date) == "ok") {
 
-                                $("#horarios").val()
+                                $("#oito").hide();
+                                $("#dez").hide();
+                                $("#quatorze").hide();
+                                $("#dezesseis").hide();
+
+                                verificaHorariosDisponiveis(date);
 
                                 //Abre modal para inserção de dados
                                 $("#modalCalendario").modal({
@@ -150,7 +224,7 @@
 
                             }
                             else {
-                               
+
                                 alert("Não é mais possível marcar consulta nesta data.");
                             }
                         }
@@ -179,27 +253,58 @@
         return retorno.responseText;
     };
 
+    function verificaHorariosDisponiveis(date) {
+        $.ajax({
+            url: "@Url.Action("VerificaHorarioDisponivel", "Cliente")",
+            type: 'GET',
+            dataType: 'JSON',
+            data: { data: date },
+            success: function (listaHorarios) {
+                console.log(listaHorarios);
+                $.each(listaHorarios, function (chave, valor) {
+                    if (String(valor['hora']) == '08:00:00') {
+                        $("#oito").show();
+                    }
+                    if (String(valor['hora']) == '10:00:00') {
+                        $("#dez").show();
+                    }
+                    if (String(valor['hora']) == '14:00:00') {
+                        $("#quatorze").show();
+                    }
+                    if (String(valor['hora']) == '16:00:00') {
+                        $("#dezesseis").show();
+                    }
+
+                })
+            }
+
+        });
+    }
+
 
     //Salvaa consulta em Banco
     function Salvar() {
         var cod = $("hddAgendamento").val();
         var objetivo = $('#objetivo').val();
         var nome = $('#nome').val();
-        var inicio = $('#horarios').val();
-        var fim = "18:00"
         var date = $('#data').val();
 
         $.ajax({
             url: "@Url.Action("CriarAgendamento", "Cliente")",
             type: "POST",
             dataType: "json",
-            data: { Codigo: cod, Objetivo: objetivo, NomeCandidato: nome, HoraInicio: inicio, HoraFim: fim, Data: date },
-            success: function (dados) {
-                var agendamento = JSON.parse(dados);
-                console.log(agendamento);
+            data: { Codigo: cod, Objetivo: objetivo, NomeCandidato: nome, HoraInicio: horario, HoraFim: horario, Data: date },
+            success: function () {
+                window.location.reload(true);
             }
         });
     };
+
+    function SalvarHorario(valor) {
+
+        horario = valor.value;
+    }
+
 
 
 
