@@ -64,19 +64,42 @@ namespace UnionDev.Models.ModelsBusiness
         public JObject EditarCliente(Cliente cliente)
         {
             JObject obj = new JObject();
-           
+            var clienteExistente = uow.ClientesRepositorio.GetByID(cliente.Codigo);
+            if (clienteExistente != null)
+            {
+                clienteExistente.CNPJ = cliente.CNPJ == null ? clienteExistente.CNPJ : cliente.CNPJ;
+                clienteExistente.Ramo = cliente.Ramo == null ? clienteExistente.Ramo : cliente.Ramo;
+                clienteExistente.RazaoSocial = cliente.RazaoSocial == null ? clienteExistente.RazaoSocial : cliente.RazaoSocial;
+
+                if(uow.ClientesRepositorio.Atualizar(clienteExistente))
+                {
+                    if(!uow.Commit())
+                    {
+                        var erro = uow.GetErro();
+                        obj.Add(new JProperty("erro: ", erro));
+
+                        return obj;
+                    }
+
+                    obj.Add(new JProperty("status: ", "ok"));
+
+                    return obj;
+                }
+
+                obj.Add(new JProperty("erro: ", "Erro ao atualizar."));
+                return obj;
+            }
 
             if (uow.ClientesRepositorio.Atualizar(cliente))
             {
                 if(uow.Commit())
                     obj.Add(new JProperty("ok", "ok"));
                 else
-                    obj.Add(new JProperty("erro", uow.GetErro()));
+                    obj.Add(new JProperty("erro: ", uow.GetErro()));
             }
             else
             {
-                obj.Add(new JProperty("erro", uow.GetErro()));
-
+                obj.Add(new JProperty("erro: ", uow.GetErro()));
             }
 
             return obj;

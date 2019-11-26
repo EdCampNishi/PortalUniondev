@@ -1,0 +1,115 @@
+﻿@model IList<UnionDev.Models.Candidato>
+
+@{
+    ViewBag.Title = "ConsultaCandidatos";
+    Layout = "~/Views/Admin/LayoutContaAdmin.cshtml";
+}
+
+<div>
+
+    <h3>Candidatos</h3>
+
+    <form class="form-horizontal" name="form" id="form">
+
+        <div class="form-group">
+
+            <div class="input-group">
+                <input type="text" class="form-control col-lg-8" name="candidato" id="candidato" placeholder="Pesquisar">
+                <button type="button" class="btn btn-primary pull-right" onclick="Consultar()" style="margin-left:5px;">Consultar</button>
+            </div>
+        </div>
+
+
+        <div class="panel-body">
+            <div id="no-more-tables">
+                <table class="table table-striped table-bordered table-hover table-condensed cf" id="grindcandidato">
+                    <thead class="cf">
+                        <tr>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Cargo</th>
+                            <th>Acao</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Count != 0)
+                        {
+                            foreach (UnionDev.Models.Candidato candidato in Model)
+                            {
+                                <tr class="gradeU">
+                                    <td data-title="Nome">@candidato.Nome</td>
+                                    <td data-title="CPF">@candidato.CPF</td>
+                                    <td data-title="Cargo">@candidato.Cargo</td>
+
+                                    <td data-title="Acao">
+                                        <button class="btn btn-primary" onclick="Remover(@candidato.Codigo)">Deletar</button>
+                                        <button type="button" class="btn btn-primary" onclick="AbrirModal(@candidato.Codigo)">Editar</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+
+
+
+    <div class="modal" id="modal" name="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Candidato</h5>
+                    <button class="close" data-dismiss="modal">
+                        <span>x</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input hidden name="idM" id="idM" />
+                        <label for="razao-social">Nome</label>
+                        <input type="text" class="form-control" name="nomeM" id="nomeM" placeholder="Nome Completo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cnpj">CPF</label>
+                        <input type="text" class="form-control" name="cpfM" id="cpfM" placeholder="___.___.___-__">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ramo">Cargo</label>
+                        <input type="text" class="form-control" name="cargoM" id="cargoM" placeholder="">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="Editar()">Salvar mudanças</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    function AbrirModal(cod) {
+        $('#modal').modal('show');
+        $.ajax({
+            url: "@Url.Action("ConsultarClientePorId", "Admin")",
+            data: { id: cod },
+            type: "GET",
+            success: function (request) {
+                var retorno = JSON.parse(request);
+                console.log(retorno);
+                $("#idM").val(retorno.Codigo);
+                $("#razaosocialM").val(retorno.RazaoSocial);
+                $("#cnpjM").val(retorno.CNPJ);
+                $("#ramoM").val(retorno.Ramo);
+            }
+        })
+    };
+</script>
+

@@ -387,6 +387,7 @@
     <Content Include="Views\Admin\ConsultaClienteAdmin.cshtml" />
     <Content Include="Views\Cliente\AgendaConsulta.cshtml" />
     <Content Include="Scripts\jquery-2.0.0.min.map" />
+    <Content Include="Views\Admin\ConsultaCandidatos.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -23,7 +23,7 @@
                 <a class="navbar-brand" href="#"><img src="~/images/logo-interno.png"></a>
 
                 <div class="d-flex flex-row">
-                    <div style="margin-right: 30px"><p style="color: white;">Bem vindo, CLIENTE</p></div>
+                    <div style="margin-right: 30px"><p style="color: white;">Bem vindo</p></div>
 
                     <a class="btn" id="btn-logout" onclick="Logout()">SAIR</a>
                 </div>
@@ -45,7 +45,7 @@
                         <a href="#" class="btn btn-primary" onclick="TelaAgenda()">Agenda</a>
                         <a href="/Admin/CadastroClienteAdmin" class="btn btn-primary">Cadastro de Clientes</a>
                         <a href="#" class="btn btn-primary" onclick="BancoClientes()">Banco de Clientes</a>
-                        <a href="#" class="btn btn-primary">Banco de Candidatos</a>
+                        <a href="#" class="btn btn-primary" onclick="BancoCandidatos()">Banco de Candidatos</a>
                         <a href="/Admin/ControleAtendimentosAdmin" class="btn btn-primary">Controle de Atendimentos</a>
                         <a href="/Admin/RelatoriosAdmin" class="btn btn-primary">Relatórios</a>
                         <a href="/Admin/AjudaAdmin" class="btn btn-primary">Ajuda</a>
@@ -81,8 +81,11 @@
 
 <script>
     function BancoClientes() {
-        @*location.href = "@Url.Action("ConsultaClienteAdmin")";*@
-        
+        location.href = "@Url.Action("ConsultaClienteAdmin", "Admin")";        
+    }
+
+    function BancoCandidatos() {
+        location.href = "@Url.Action("ConsultaCandidatos", "Admin")";        
     }
 
     function Logout() {

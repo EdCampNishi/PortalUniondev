@@ -93,5 +93,23 @@ namespace UnionDev.Controllers
             JObject cli = cliBusiness.RemoverCliente(int.Parse(codigo));
             return cli.ToString();
         }
+
+
+        public ActionResult ConsultaCandidatos()
+        {
+            CandidatoBusiness candidatoBusiness = new CandidatoBusiness();
+            IList<Candidato> candidatos = candidatoBusiness.ObterTodosCandidato();
+
+            return View(candidatos);
+        }
+
+        [HttpGet]
+        public JObject ConsultarCandidatoPorId(int id)
+        {
+            CandidatoBusiness candidatoBusiness = new CandidatoBusiness();
+            JObject candidato = candidatoBusiness.ObterCandidatoPorId(id);
+
+            return candidato;
+        }
     }
 }

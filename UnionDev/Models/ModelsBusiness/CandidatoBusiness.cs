@@ -41,11 +41,27 @@ namespace UnionDev.Models.ModelsBusiness
 
         }
 
-        public Candidato ObterCandidato(Candidato candidato)
+        public List<Candidato> ObterTodosCandidato()
         {
+            List<Candidato> candidatos = uow.CandidatosRepositorio.GetAllAsNoTracking().ToList();
 
+            return candidatos;
+        }
 
-            return candidato;
+        public JObject ObterCandidatoPorId(int id)
+        {
+            Candidato candidato;
+            try
+            {
+                candidato = uow.CandidatosRepositorio.GetByID(id);
+                JObject candidadoObj = JObject.FromObject(candidato);
+
+                return candidadoObj;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
