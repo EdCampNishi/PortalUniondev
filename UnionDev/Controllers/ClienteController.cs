@@ -75,12 +75,18 @@ namespace UnionDev.Controllers
         }
 
         [HttpPost]
-        public ActionResult CriarAgendamento(Models.Agendamento agendamento)
+        public JObject CriarAgendamento(Models.Agendamento agendamento)
         {
+            JObject obj = new JObject();
             Models.ModelsBusiness.AgendamentoBusiness agBusiness = new Models.ModelsBusiness.AgendamentoBusiness();
             Models.Agendamento ag = agBusiness.SalvarAgendamento(agendamento);
 
-            return RedirectToAction("ControleAtendimentoCliente");
+            if (ag != null)
+                obj.Add(new JProperty("status", "ok"));
+            else
+                obj.Add(new JProperty("status", "erro"));
+
+            return obj;
         }
 
         public JObject CadastrarCandidato(Candidato candidato)

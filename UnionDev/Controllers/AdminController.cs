@@ -20,7 +20,10 @@ namespace UnionDev.Controllers
         
         public ActionResult PainelControleAdmin()
         {
-            return View();
+            AgendamentoBusiness agendamentoBusiness = new AgendamentoBusiness();
+            var agendamentos = agendamentoBusiness.ConsultaAgendamentoDoDia();
+
+            return View(agendamentos);
         }
 
         public ActionResult CadastroClienteAdmin()
@@ -110,6 +113,15 @@ namespace UnionDev.Controllers
             JObject candidato = candidatoBusiness.ObterCandidatoPorId(id);
 
             return candidato;
+        }
+
+        public JObject ConsultarAgendamentoPorId(int id)
+        {
+            AgendamentoBusiness agendamentoBusiness = new AgendamentoBusiness();
+
+            var agendamento = agendamentoBusiness.ConsultaAgendamentoPorId(id);
+
+            return agendamento;
         }
     }
 }

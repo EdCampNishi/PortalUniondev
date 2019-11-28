@@ -33,6 +33,21 @@ namespace UnionDev.Models.ModelsBusiness
             return arr;
         }
 
+        public IList<Agendamento> ConsultaAgendamentoDoDia()
+        {
+            try
+            {
+                var agendamento = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Data == DateTime.Now).ToList();
+
+                return agendamento;
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+
+        }
+
         public JArray ConsultaHorarios(DateTime date)
         {
             JArray arr = new JArray();
@@ -115,6 +130,28 @@ namespace UnionDev.Models.ModelsBusiness
             if (data != null)
                 listaConsultas = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Data == data).ToList();
             return listaConsultas;
+        }
+
+        public JObject ConsultaAgendamentoPorId(int id)
+        {
+            var agendamento = uow.AgendamentosRepositorio.GetByID(id);
+
+            JObject obj = new JObject();
+
+            if(agendamento != null)
+            {
+
+                obj.Add(new JProperty("Codigo", agendamento.Codigo));
+                obj.Add(new JProperty("Candidato", agendamento.NomeCandidato));
+                obj.Add(new JProperty("Descricao", agendamento.Descricao));
+                obj.Add(new JProperty("Horario", agendamento.HoraInicio));
+            }
+            else
+            {
+                obj.Add(new JProperty("erro", "Não foi encontrado agendamento"));
+            }
+
+            return obj;
         }
     }
 }

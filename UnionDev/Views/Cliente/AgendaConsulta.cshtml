@@ -294,8 +294,15 @@
             type: "POST",
             dataType: "json",
             data: { Codigo: cod, Objetivo: objetivo, NomeCandidato: nome, HoraInicio: horario, HoraFim: horario, Data: date },
-            success: function () {
-                window.location.reload(true);
+            success: function (retorno) {
+                if (retorno['status'] == "ok") {
+                    window.location.reload(true);
+                }
+                else {
+                    show.alert("Não foi possível salvar sua consulta");
+                }
+                    
+                
             }
         });
     };
