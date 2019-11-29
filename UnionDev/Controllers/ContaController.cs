@@ -9,6 +9,8 @@ using UnionDev.Models.ModelsBusiness;
 using System.Security.Cryptography;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using System.Web.Security;
+using UnionDev.Models.Services;
 
 namespace UnionDev.Controllers
 {
@@ -26,15 +28,23 @@ namespace UnionDev.Controllers
         {
             var validacao = ValidaUsuario(usuario);
             if (validacao != null)
-                if(int.Parse(validacao["Permissao"].ToString()) == 1 )
+            {
+                if (int.Parse(validacao["Permissao"].ToString()) == 1)
+                {
+                    var nome = usuario.Login.Encriptar();
                     return RedirectToAction("PainelControleAdmin", "Admin");
+                }
                 else
                     return RedirectToAction("Index", "Cliente");
+            }
             else
             {
                 ViewBag.Message = "Usuário Inválido.";
                 return View(usuario);
             }
+
+            
+
         }
 
         public string CriarUsuario(Usuarios usuario)

@@ -8,6 +8,7 @@ using System.Text;
 using System.Web;
 using UnionDev.Models.BD;
 using UnionDev.Models.BD.Repositorio;
+using UnionDev.Models.Services;
 
 namespace UnionDev.Models.ModelsBusiness
 {
@@ -61,9 +62,9 @@ namespace UnionDev.Models.ModelsBusiness
 
             StringBuilder senha = new StringBuilder();
             //pbkdf2
-            byte[] senhaBytes = Encoding.ASCII.GetBytes(usuario.Senha);
-            var encrypter = new SHA256Managed();
-            var hash = encrypter.ComputeHash(senhaBytes);
+            //byte[] senhaBytes = Encoding.ASCII.GetBytes(usuario.Senha);
+            //var encrypter = new SHA256Managed();
+            //var hash = encrypter.ComputeHash(senhaBytes);
 
 
 
@@ -75,7 +76,7 @@ namespace UnionDev.Models.ModelsBusiness
             //{
             //    senha.Append(hash[i].ToString());
             //}
-            usuario.SenhaCriptografada = hash;
+            usuario.SenhaCriptografada = usuario.Senha.Encriptar();
             usuario.Ativo = true;
 
             if (uow.UsuariosRepositorio.Adicionar(usuario))
@@ -97,7 +98,5 @@ namespace UnionDev.Models.ModelsBusiness
                 return obj;
             }
         }
-
-
     }
 }

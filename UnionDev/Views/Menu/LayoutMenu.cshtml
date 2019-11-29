@@ -1,0 +1,46 @@
+﻿<style>
+
+    .sidenav {
+        height: 100%;
+        width: 230px;
+        position: fixed;
+        z-index: 1;
+        top: 100px;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+        .sidenav a {
+            height: 53px;
+            line-height: 22px;
+            padding: 12px 8px 6px 25px;
+            text-decoration: none;
+            font-size: 15px;
+            color: #818181;
+            display: block;
+        }
+
+            .sidenav a:hover {
+                color: #f1f1f1;
+                background: #818181;
+            }
+
+    .main {
+        margin-left: 160px; /* Same as the width of the sidenav */
+        font-size: 28px; /* Increased text to enable scrolling */
+        padding: 0px 10px;
+    }
+</style>
+
+<div class="sidenav">
+    <a href="/Admin/PainelControleAdmin">Painel de Controle</a>
+    <a href="#" onclick="">Agenda</a>
+    <a href="/Admin/CadastroClienteAdmin">Cadastro de Clientes</a>
+    <a href="#" onclick="BancoClientes()">Banco de Clientes</a>
+    <a href="#" onclick="BancoCandidatos()">Banco de Candidatos</a>
+    <a href="/Admin/ControleAtendimentosAdmin">Controle de Atendimentos</a>
+    <a href="/Admin/RelatoriosAdmin">Relatórios</a>
+    <a href="/Admin/AjudaAdmin">Ajuda</a>
+</div>

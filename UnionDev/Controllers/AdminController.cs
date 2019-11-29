@@ -123,5 +123,10 @@ namespace UnionDev.Controllers
 
             return agendamento;
         }
+
+        public ActionResult Agenda()
+        {
+            return View();
+        }
     }
 }

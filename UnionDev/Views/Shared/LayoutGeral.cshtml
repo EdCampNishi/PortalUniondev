@@ -36,36 +36,19 @@
         <!-- Menu Lateral-->
 
 
+
         <div class="container">
-            <div class="row">
+            <div class="col-md-3">
+                @Html.Partial("~/Views/Menu/LayoutMenu.cshtml");
+            </div>
+            <!-- Conteúdo-->
 
-                <div class="col-md-3">
-                    <div class="btn-group-vertical">
-                        <a href="/Admin/PainelControleAdmin" class="btn btn-primary">Painel de Controle</a>
-                        <a href="#" class="btn btn-primary" onclick="">Agenda</a>
-                        <a href="/Admin/CadastroClienteAdmin" class="btn btn-primary">Cadastro de Clientes</a>
-                        <a href="#" class="btn btn-primary" onclick="BancoClientes()">Banco de Clientes</a>
-                        <a href="#" class="btn btn-primary" onclick="BancoCandidatos()">Banco de Candidatos</a>
-                        <a href="/Admin/ControleAtendimentosAdmin" class="btn btn-primary">Controle de Atendimentos</a>
-                        <a href="/Admin/RelatoriosAdmin" class="btn btn-primary">Relatórios</a>
-                        <a href="/Admin/AjudaAdmin" class="btn btn-primary">Ajuda</a>
-                    </div>
-                </div>
-
-                <!-- Conteúdo-->
-
-                <div class="col-md-9">
-                    <div>
-                        @RenderBody()
-                    </div>
-                </div>
-
-
+            <div class="col-xl-auto" id="content" style="margin-left: 50px; width: 1300px;">
+                @RenderBody()
             </div>
 
+
         </div>
-
-
 
     </div>
 
@@ -86,11 +69,11 @@
     })
 
     function BancoClientes() {
-        location.href = "@Url.Action("ConsultaClienteAdmin", "Admin")";        
+        location.href = "@Url.Action("ConsultaClienteAdmin", "Admin")";
     }
 
     function BancoCandidatos() {
-        location.href = "@Url.Action("ConsultaCandidatos", "Admin")";        
+        location.href = "@Url.Action("ConsultaCandidatos", "Admin")";
     }
 
     function Logout() {
