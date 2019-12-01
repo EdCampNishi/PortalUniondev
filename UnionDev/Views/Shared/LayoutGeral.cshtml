@@ -31,26 +31,24 @@
             </div>
         </nav>
 
-        <div style="height: 40px"></div>
+    </div>
+    <div style="height: 40px"></div>
 
+    <div class="container" style="position:relative;">
         <!-- Menu Lateral-->
-
-
-
-        <div class="container">
-            <div class="col-md-3">
-                @Html.Partial("~/Views/Menu/LayoutMenu.cshtml");
-            </div>
-            <!-- Conteúdo-->
-
-            <div class="col-xl-auto" id="content" style="margin-left: 50px; width: 1300px;">
-                @RenderBody()
-            </div>
-
-
+        <div class="col-md-3"  style="position: absolute; left:0px; width:200px;">
+            @Html.Partial("~/Views/Menu/LayoutMenu.cshtml")
         </div>
 
+        <!-- Conteúdo-->
+        <div class="col-xl-9" style="margin-left: 200px;">
+            @RenderBody()
+        </div>
+
+
     </div>
+
+
 
 
 
@@ -67,6 +65,10 @@
     $(document).ready(function () {
         $("#usu").val("Admin");
     })
+
+    function Agenda() {
+        location.href = "@Url.Action("AgendaConsulta", "Cliente")"
+    }
 
     function BancoClientes() {
         location.href = "@Url.Action("ConsultaClienteAdmin", "Admin")";
