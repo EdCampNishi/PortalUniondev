@@ -5,13 +5,46 @@
 }
 
 <div class="w3-container" style="background-color: white; padding: 50px" id="area-login">
+    @if (Request.QueryString["ReturnUrl"] != null)
+    {
+        <div id="aviso" class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            @if (Request.QueryString["ReturnUrl"] == "Perfil")
+            {
+                @Html.Raw("Você não possui um perfil de acesso")
+            }
+            else
+            {
+                @Html.Raw("Você não possui permissão para acessar esá pagina.")
+            }
+        </div>
+    }
+
     <h1>CEAP - Área do Cliente</h1>
     <div class="w3ls-login box box--big">
 
         <br>
 
-        @using (Html.BeginForm("Login", "Conta", FormMethod.Post))
+        @using (Html.BeginForm("Logar", "Conta", FormMethod.Post))
         {
+            if (Request.QueryString["valid"] != null)
+            {
+                switch (Request.QueryString["valid"])
+                {
+                    case "campos":
+                        ViewBag.msg = "Email e senha obrigatória";
+                        break;
+                    case "usuarioousenha":
+                        ViewBag.msg = "Usuário ou Senha inválido";
+                        break;
+                }
+
+                <div id="aviso" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @Html.Raw(ViewBag.msg)
+                </div>
+            }
 
             <div class="form-group col-md-6">
                 <label for="login">Login</label>
@@ -32,9 +65,9 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary" onclick="Logar()">Login</button>
+            <input type="submit" class="btn btn-primary" value="Entrar">
 
-         }
+        }
     </div>
 
 
@@ -55,16 +88,16 @@
 
 
         $.ajax({
-            url: '@Url.Action("Login", "Conta")',
+                url: '@Url.Action("Logar", "Conta")',
             dataType: 'json',
             type: 'POST',
             data: {Login: $("#login").val(), Senha: $("#senha").val()},
             success: function (data) {
-                alert("@ViewBag.Message");
-            }
-        });
+                        alert("@ViewBag.Message");
+                    }
+                });
 
-    }
+            }
 
     function myFunction() {
         var x = document.getElementById("myInput");

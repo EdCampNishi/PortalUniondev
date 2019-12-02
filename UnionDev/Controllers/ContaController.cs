@@ -81,14 +81,32 @@ namespace UnionDev.Controllers
                 string e_nomeusu = FormsAuthentication.Encrypt(nomeusu);
                 string e_id = FormsAuthentication.Encrypt(id);
 
-                Response.Cookies.Add(new HttpCookie("nomePoral", e_nomeusu));
+                Response.Cookies.Add(new HttpCookie("nomePortal", e_nomeusu));
                 Response.Cookies.Add(new HttpCookie("idPortal", e_id));
 
-                return RedirectToAction("PainelControleCliente", "Cliente");
+                return RedirectToAction("PainelControleAdmin", "Admin");
 
             }
         }
 
+
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            string[] limpar = new string[] { "nomePortal", "idPortal", "codemPortal" };
+            string[] todos = Request.Cookies.AllKeys;
+
+            foreach( string cookie in todos)
+            {
+                Response.Cookies[cookie].Expires = DateTime.Now.AddDays(-1);
+            }
+            if(Request.QueryString["ReturnUrl"] != null)
+            {
+                return RedirectToAction("Login", new { ReturnUrl = Request.QueryString["ReturnUrl"] });
+            }
+            return RedirectToAction("Login");
+
+        }
         [HttpPost]
         [AllowAnonymous]
         public ActionResult Login(Usuarios usuario)

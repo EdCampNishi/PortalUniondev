@@ -17,11 +17,11 @@ namespace UnionDev.Models.ModelsBusiness
             contexto = new Contexto();
             uow = new UnitOfWork(contexto);
         }
-        public Usuarios Logar(string email, string senha)
+        public Usuarios Logar(string email, byte[] senha)
         {
             try
             {
-                Usuarios usuario = uow.UsuariosRepositorio.Get(x => x.Login == email && x.Senha == senha && x.Ativo == false);
+                Usuarios usuario = uow.UsuariosRepositorio.Get(x => x.Login == email && x.SenhaCriptografada == senha && x.Ativo != false);
 
                 if(usuario == null)
                 {

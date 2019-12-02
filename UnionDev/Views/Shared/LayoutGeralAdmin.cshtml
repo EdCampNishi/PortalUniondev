@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="~/styles/bootstrap.css">
     <link rel="stylesheet" href="~/styles/styles.css">
 
+    @{ 
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(Request.Cookies["nomePortal"].Value);
+        var nome = ticket.UserData;
+    }
+
     <title>CEAP Gestão de Pessoas</title>
 </head>
 <body style="background-color:white">
@@ -23,9 +28,9 @@
                 <a class="navbar-brand" href="#"><img src="~/images/logo-interno.png"></a>
 
                 <div class="d-flex flex-row">
-                    <div style="margin-right: 30px"><p style="color: white;">Bem vindo, <span id="usu"></span></p></div>
+                    <div style="margin-right: 30px"><p style="color: white;">Bem vindo, @nome</p></div>
 
-                    <a class="btn" id="btn-logout" onclick="Logout()">SAIR</a>
+                    <button class="btn" id="btn-logout" onclick="Logout()">SAIR</button>
                 </div>
 
             </div>
@@ -79,7 +84,7 @@
     }
 
     function Logout() {
-        window.location.href = "@Url.Action("Login", "Conta")";
+        window.location.href = "@Url.Action("LogOff", "Conta")";
     }
 
     function TelaAgenda() {

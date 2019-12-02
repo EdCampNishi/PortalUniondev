@@ -102,11 +102,12 @@ namespace UnionDev.Models.ModelsBusiness
         public Usuarios Login(string email, string senha)
         {
             ControleUsuario controleUsu = new ControleUsuario();
-            var cripto = email + ";" + senha;
+            //var cripto = senha;
+            //var cripto = email + ";" + senha;
             email = email.ToLower();
-            senha = cripto.EncriptarString();
+            var senhaCripto = senha.Encriptar();
 
-            Usuarios usu = controleUsu.Logar(email, senha);
+            Usuarios usu = controleUsu.Logar(email, senhaCripto);
 
             return usu;
             
