@@ -23,7 +23,8 @@ namespace UnionDev.Models.BD.Mapeamento
             Property(x => x.Sexo).HasColumnName("CAN_SEXO");
             Property(x => x.Cargo).HasColumnName("CAN_CARGO");
             Property(x => x.Setor).HasColumnName("CAN_SETOR");
-            Property(x => x.Empresa).HasColumnName("CAN_EMPRESA");
+            Property(x => x.ClienteCodigo).HasColumnName("CAN_CLICODIGO");
+
         }
     }
 }

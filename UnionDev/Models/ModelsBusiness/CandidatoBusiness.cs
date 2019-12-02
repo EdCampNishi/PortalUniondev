@@ -48,6 +48,13 @@ namespace UnionDev.Models.ModelsBusiness
             return candidatos;
         }
 
+        public List<Candidato> ObterCandidatosPorEmpresa(Cliente cliente)
+        {
+            List<Candidato> candidatos = uow.CandidatosRepositorio.GetAllAsNoTracking(x => x.ClienteCodigo == cliente.Codigo).ToList();
+
+            return candidatos;
+        }
+
         public JObject ObterCandidatoPorId(int id)
         {
             Candidato candidato;

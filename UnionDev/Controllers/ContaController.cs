@@ -19,7 +19,74 @@ namespace UnionDev.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            return View();
+            bool logado = (System.Web.HttpContext.Current.User != null) && System.Web.HttpContext.Current.User.Identity.IsAuthenticated;
+
+            if(logado)
+            {
+                if(Request.QueryString["ReturnUrl"] != null)
+                {
+                    return RedirectToAction("LogOff", new { ReturnUrl = Request.QueryString["ReturnUrl"] });
+                }
+                return RedirectToAction("PainelControleCliente", "Cliente");
+            }
+            else
+            {
+                return View(new Usuarios());
+            }            
+        }
+
+        public ActionResult Logar(Usuarios usu, FormCollection form)
+        {
+            if (!(ModelState.IsValidField("Email") && ModelState.IsValidField("Senha")))
+            {
+                return RedirectToAction("Login", new { valid = "campos" });
+            }
+            else
+            {
+                UsuariosBusiness usuBusiness = new UsuariosBusiness();
+                Usuarios usuLogado = usuBusiness.Login(usu.Login, usu.Senha);
+                if(usuLogado == null)
+                {
+                    return RedirectToAction("Login", new { valid = "usuarioousenha" });
+                }
+
+                if(Request.Form["chkcontinuarLogado"] == "on")
+                {
+                    FormsAuthentication.SetAuthCookie(usu.Login, true);
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(usu.Login, false);
+                }
+
+                FormsAuthenticationTicket nomeusu = new FormsAuthenticationTicket(
+
+                    1,
+                    "Nomeusu",
+                    DateTime.Now,
+                    DateTime.Now.AddDays(10),
+                    true,
+                    usuLogado.Login,
+                    FormsAuthentication.FormsCookiePath);
+
+                FormsAuthenticationTicket id = new FormsAuthenticationTicket(
+                    1,
+                    "codigousu",
+                    DateTime.Now,
+                    DateTime.Now.AddDays(20),
+                    true,
+                    Convert.ToString(usuLogado.Codigo),
+                    FormsAuthentication.FormsCookiePath);
+
+                string e_nomeusu = FormsAuthentication.Encrypt(nomeusu);
+                string e_id = FormsAuthentication.Encrypt(id);
+
+                Response.Cookies.Add(new HttpCookie("nomePoral", e_nomeusu));
+                Response.Cookies.Add(new HttpCookie("idPortal", e_id));
+
+                return RedirectToAction("PainelControleCliente", "Cliente");
+
+            }
         }
 
         [HttpPost]

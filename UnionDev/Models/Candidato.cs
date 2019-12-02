@@ -14,6 +14,7 @@ namespace UnionDev.Models
         public string Sexo { get; set; }
         public string Cargo { get; set; }
         public string Setor { get; set; }
-        public string Empresa { get; set; }
+        public virtual Cliente Cliente { get; set; }
+        public int ClienteCodigo { get; set; }
     }
 }

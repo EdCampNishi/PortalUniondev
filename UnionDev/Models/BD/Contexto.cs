@@ -37,6 +37,10 @@ namespace UnionDev.Models.BD
             modelBuilder.Configurations.Add(new CandidatoMAP());
             modelBuilder.Configurations.Add(new AgendamentoMAP());
             modelBuilder.Configurations.Add(new PermissaoMAP());
+
+            modelBuilder.Entity<Candidato>()
+                .Property(x => x.ClienteCodigo)
+                .IsRequired();
         }
 
         public override int SaveChanges()

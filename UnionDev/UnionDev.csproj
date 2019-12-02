@@ -346,6 +346,7 @@
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\ModelsBusiness\AgendamentoBusiness.cs" />
     <Compile Include="Models\ModelsBusiness\CandidatoBusiness.cs" />
+    <Compile Include="Models\ModelsBusiness\ControleUsuario.cs" />
     <Compile Include="Models\ModelsBusiness\PermissaoBusiness.cs" />
     <Compile Include="Models\ModelsBusiness\UsuariosBusiness.cs" />
     <Compile Include="Models\Permissao.cs" />
@@ -390,8 +391,11 @@
     <Content Include="Scripts\jquery-2.0.0.min.map" />
     <Content Include="Views\Admin\ConsultaCandidatos.cshtml" />
     <Content Include="Views\Admin\Agenda.cshtml" />
-    <Content Include="Views\Shared\LayoutGeral.cshtml" />
+    <Content Include="Views\Shared\LayoutGeralAdmin.cshtml" />
     <Content Include="Views\Menu\LayoutMenu.cshtml" />
+    <Content Include="Views\Shared\LayuotGeralCliente.cshtml" />
+    <Content Include="Views\Menu\LayoutMenuCliente.cshtml" />
+    <Content Include="Views\Cliente\BancoCandidato.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

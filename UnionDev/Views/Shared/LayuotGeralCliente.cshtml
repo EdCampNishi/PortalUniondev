@@ -1,0 +1,89 @@
+﻿<!doctype html>
+<html lang="pt-br">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/styles/bootstrap.css">
+    <link rel="stylesheet" href="~/styles/styles.css">
+
+    <title>CEAP Gestão de Pessoas</title>
+</head>
+<body style="background-color:white">
+
+    <div class="container" id="navbar-site">
+
+        <!-- Barra -->
+
+        <nav class="navbar fixed-top navbar-expand-lg" id="barra-interno">
+
+            <div class="container">
+                <a class="navbar-brand" href="#"><img src="~/images/logo-interno.png"></a>
+
+                <div class="d-flex flex-row">
+                    <div style="margin-right: 30px"><p style="color: white;">Bem vindo, <span id="usu"></span></p></div>
+
+                    <a class="btn" id="btn-logout" onclick="Logout()">SAIR</a>
+                </div>
+
+            </div>
+        </nav>
+
+    </div>
+    <div style="height: 40px"></div>
+
+    <div class="container" style="position:relative;">
+        <!-- Menu Lateral-->
+        <div class="col-md-3" style="position: absolute; left:0px; width:200px;">
+            @Html.Partial("~/Views/Menu/LayoutMenuCliente.cshtml")
+        </div>
+
+        <!-- Conteúdo-->
+        <div class="col-xl-9" style="margin-left: 200px;">
+            @RenderBody()
+        </div>
+
+
+    </div>
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+<script>
+
+    $(document).ready(function () {
+        $("#usu").val("");
+    });
+
+    function PainelDeControleCliente() {
+        location.href = "@Url.Action("PainelControleCliente", "Cliente")";
+    };
+
+    function AgendarExame() {
+        location.href = "@Url.Action("AgendaConsulta", "Cliente")"
+    };
+
+    function CadastrarCandidato() {
+        location.href = "@Url.Action("CadastroCandidatoCliente", "Cliente")";
+    };
+
+
+
+    function Logout() {
+        window.location.href = "@Url.Action("Login", "Conta")";
+    };
+
+
+
+</script>

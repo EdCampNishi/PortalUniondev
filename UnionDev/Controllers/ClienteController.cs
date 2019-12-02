@@ -69,6 +69,15 @@ namespace UnionDev.Controllers
         }
 
 
+        public ActionResult BancoCandidato()
+        {
+            Cliente cliente = new Cliente();
+            CandidatoBusiness candidatoBusiness = new CandidatoBusiness();
+            IList<Candidato> candidatos = candidatoBusiness.ObterCandidatosPorEmpresa(cliente);
+
+            return View();
+        }
+
         public ActionResult Agenda()
         {
             return View();

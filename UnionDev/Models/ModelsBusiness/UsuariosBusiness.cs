@@ -98,5 +98,19 @@ namespace UnionDev.Models.ModelsBusiness
                 return obj;
             }
         }
+
+        public Usuarios Login(string email, string senha)
+        {
+            ControleUsuario controleUsu = new ControleUsuario();
+            var cripto = email + ";" + senha;
+            email = email.ToLower();
+            senha = cripto.EncriptarString();
+
+            Usuarios usu = controleUsu.Logar(email, senha);
+
+            return usu;
+            
+
+        }
     }
 }
