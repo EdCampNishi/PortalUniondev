@@ -153,5 +153,12 @@ namespace UnionDev.Models.ModelsBusiness
 
             return obj;
         }
+
+        public IList<Agendamento> ConsultaTodosAgendamentos()
+        {
+            var listaAgendamentos = uow.AgendamentosRepositorio.GetAllAsNoTracking(x => x.Data > DateTime.Now).ToList();
+
+            return listaAgendamentos;
+        }
     }
 }

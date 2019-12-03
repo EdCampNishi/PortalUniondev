@@ -9,14 +9,15 @@
     <link rel="stylesheet" href="~/styles/bootstrap.css">
     <link rel="stylesheet" href="~/styles/styles.css">
 
-    @{ 
+    @{
         FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(Request.Cookies["nomePortal"].Value);
         var nome = ticket.UserData;
     }
 
     <title>CEAP Gestão de Pessoas</title>
 </head>
-<body style="background-color:white">
+
+<body style="background-color:white; margin-bottom:15px;">
 
     <div class="container" id="navbar-site">
 
@@ -36,26 +37,29 @@
             </div>
         </nav>
 
+
     </div>
+
     <div style="height: 40px"></div>
 
     <div class="container" style="position:relative;">
+
         <!-- Menu Lateral-->
-        <div class="col-md-3"  style="position: absolute; left:0px; width:200px;">
+        <div class="col-md-3" style="position: absolute; left:0px; width:200px;">
             @Html.Partial("~/Views/Menu/LayoutMenu.cshtml")
         </div>
 
         <!-- Conteúdo-->
-        <div class="col-xl-9" style="margin-left: 200px;">
+        <div class="col-xl-9" style="margin-left: 200px; margin-bottom: 50px;">
             @RenderBody()
         </div>
 
-
     </div>
 
-
-
-
+    @*<footer style="margin-left:300px;">
+        <p>Criado por: Uniondev</p>
+        <p>Contato: impuniondev@gmail.com</p>
+    </footer>*@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -63,16 +67,21 @@
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
 </body>
+
 </html>
 
 <script>
 
     $(document).ready(function () {
         $("#usu").val("Admin");
-    })
+    });
 
     function Agenda() {
-        location.href = "@Url.Action("AgendaConsulta", "Cliente")"
+        location.href = "@Url.Action("Agenda", "Admin")"
+    }
+
+    function CadastroCliente() {
+        window.location.href = "@Url.Action("CadastroClienteAdmin", "Admin")"
     }
 
     function BancoClientes() {
@@ -88,7 +97,11 @@
     }
 
     function TelaAgenda() {
-        window.location.href = "@Url.Action("", "Admin")"
+        window.location.href = "@Url.Action("", "Admin")";
+    }
+
+    function TelaRelatorio() {
+        window.location.href = "@Url.Action("Relatorio", "Admin")"
     }
 
 

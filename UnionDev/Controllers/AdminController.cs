@@ -126,7 +126,16 @@ namespace UnionDev.Controllers
 
         public ActionResult Agenda()
         {
+            AgendamentoBusiness agendamentoBusiness = new AgendamentoBusiness();
+
+            IList<Agendamento> listaAgenda = agendamentoBusiness.ConsultaTodosAgendamentos();
+            return View(listaAgenda);
+        }
+
+        public ActionResult Relatorio()
+        {
             return View();
         }
+
     }
 }
