@@ -50,6 +50,7 @@ namespace UnionDev.Controllers
 
         public ActionResult CadastroCandidatoCliente()
         {
+            //CRIAR VIEWBAG PARA LISTAR TODOS OS CLIENTES CADASTRADOS E LEVAR PARA A TELA DE CADASTRO
             return View();
         }
 
@@ -75,7 +76,7 @@ namespace UnionDev.Controllers
             CandidatoBusiness candidatoBusiness = new CandidatoBusiness();
             IList<Candidato> candidatos = candidatoBusiness.ObterCandidatosPorEmpresa(cliente);
 
-            return View();
+            return View(candidatos);
         }
 
         public ActionResult Agenda()
@@ -106,15 +107,8 @@ namespace UnionDev.Controllers
             var can = canBusiness.CriarCandidato(candidato);
             if (can != null)
             {
-                Usuarios usu = new Usuarios
-                {
-                    Login = candidato.CPF,
-                    Senha = "12345",
-                    Ativo = true
-                };
-                var usuarioCriado = usuBusiness.CriarUsuario(usu);
-                if (usuarioCriado["status"].ToString() == "ok")
-                    return usuarioCriado;
+                retornoCriação.Add(new JProperty("status", "ok"));
+                
             }
             retornoCriação.Add(new JProperty("status", "nok"));
             return retornoCriação;

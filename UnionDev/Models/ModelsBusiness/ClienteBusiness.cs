@@ -47,15 +47,19 @@ namespace UnionDev.Models.ModelsBusiness
         public JObject CadastrarCliente(Cliente cli)
         {
             JObject obj = new JObject();
+            UsuariosBusiness usuBusiness = new UsuariosBusiness();
 
             if (uow.ClientesRepositorio.Adicionar(cli))
             {
-                uow.Commit();
-                obj.Add(new JProperty("ok", "ok"));
+                if (uow.Commit())
+                {
+                    if (usuBusiness.CriarUsuario(cli)["status"].ToString() == "ok")
+                        obj.Add(new JProperty("status", "ok"));
+                }
             }
             else
             {
-                obj.Add(new JProperty("erro", uow.GetErro()));
+                obj.Add(new JProperty("status", uow.GetErro()));
             }
 
             return obj;
@@ -71,9 +75,9 @@ namespace UnionDev.Models.ModelsBusiness
                 clienteExistente.Ramo = cliente.Ramo == null ? clienteExistente.Ramo : cliente.Ramo;
                 clienteExistente.RazaoSocial = cliente.RazaoSocial == null ? clienteExistente.RazaoSocial : cliente.RazaoSocial;
 
-                if(uow.ClientesRepositorio.Atualizar(clienteExistente))
+                if (uow.ClientesRepositorio.Atualizar(clienteExistente))
                 {
-                    if(!uow.Commit())
+                    if (!uow.Commit())
                     {
                         var erro = uow.GetErro();
                         obj.Add(new JProperty("erro: ", erro));
@@ -92,7 +96,7 @@ namespace UnionDev.Models.ModelsBusiness
 
             if (uow.ClientesRepositorio.Atualizar(cliente))
             {
-                if(uow.Commit())
+                if (uow.Commit())
                     obj.Add(new JProperty("ok", "ok"));
                 else
                     obj.Add(new JProperty("erro: ", uow.GetErro()));
@@ -107,7 +111,7 @@ namespace UnionDev.Models.ModelsBusiness
 
         public JObject RemoverCliente(int codigo)
         {
-            JObject obj = new JObject();           
+            JObject obj = new JObject();
 
             Cliente cliente = uow.ClientesRepositorio.GetByID(codigo);
             if (uow.ClientesRepositorio.Deletar(cliente))
@@ -123,6 +127,27 @@ namespace UnionDev.Models.ModelsBusiness
 
             return obj;
 
+        }
+
+        public JArray AutoCompletaCliente(string term)
+        {
+            JArray arr = new JArray();
+
+            IList<Cliente> listaClientes = uow.ClientesRepositorio.GetAllAsNoTracking(x => x.RazaoSocial.ToLower().Contains(term.ToLower())).OrderBy(x => x.RazaoSocial).ToList();
+
+            if (listaClientes == null)
+            {
+                return arr;
+            }
+
+            foreach (Cliente cli in listaClientes)
+            {
+                arr.Add(new JObject(
+                    new JProperty("valor", cli.RazaoSocial),
+                    new JProperty("codigo", cli.Codigo)
+                    ));
+            }
+            return arr;
         }
     }
 }

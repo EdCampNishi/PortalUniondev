@@ -44,7 +44,11 @@ namespace UnionDev.Controllers
             else
             {
                 UsuariosBusiness usuBusiness = new UsuariosBusiness();
-                Usuarios usuLogado = usuBusiness.Login(usu.Login, usu.Senha);
+                Usuarios usuLogado;
+                if (usu.Login == "admin")
+                    usuLogado = usuBusiness.Login(usu.Login, usu.Senha);
+                else
+                    usuLogado = usuBusiness.ObterUsuario(usu).Item2;
                 if(usuLogado == null)
                 {
                     return RedirectToAction("Login", new { valid = "usuarioousenha" });
@@ -66,7 +70,7 @@ namespace UnionDev.Controllers
                     DateTime.Now,
                     DateTime.Now.AddDays(10),
                     true,
-                    usuLogado.Login,
+                    usuLogado.Apelido,
                     FormsAuthentication.FormsCookiePath);
 
                 FormsAuthenticationTicket id = new FormsAuthenticationTicket(
@@ -78,11 +82,22 @@ namespace UnionDev.Controllers
                     Convert.ToString(usuLogado.Codigo),
                     FormsAuthentication.FormsCookiePath);
 
+                FormsAuthenticationTicket permissao = new FormsAuthenticationTicket(
+                    1,
+                    "permusu",
+                    DateTime.Now,
+                    DateTime.Now.AddDays(20),
+                    true,
+                    Convert.ToString(usuLogado.PermissaoCodigo),
+                    FormsAuthentication.FormsCookiePath);
+
                 string e_nomeusu = FormsAuthentication.Encrypt(nomeusu);
                 string e_id = FormsAuthentication.Encrypt(id);
+                string e_permissao = FormsAuthentication.Encrypt(permissao);
 
                 Response.Cookies.Add(new HttpCookie("nomePortal", e_nomeusu));
                 Response.Cookies.Add(new HttpCookie("idPortal", e_id));
+                Response.Cookies.Add(new HttpCookie("permissao", e_permissao));
 
                 return RedirectToAction("PainelControleAdmin", "Admin");
 
@@ -132,10 +147,10 @@ namespace UnionDev.Controllers
 
         }
 
-        public string CriarUsuario(Usuarios usuario)
+        public string CriarUsuario(Cliente cli)
         {
             UsuariosBusiness usuBusiness = new UsuariosBusiness();
-            var usu = usuBusiness.CriarUsuario(usuario);
+            var usu = usuBusiness.CriarUsuario(cli);
 
             return "ok";
         }
@@ -144,7 +159,7 @@ namespace UnionDev.Controllers
         {
             AdminController contrl = new AdminController();
             UsuariosBusiness usuBusiness = new UsuariosBusiness();
-            var usu = usuBusiness.ObterUsuario(usuario);
+            var usu = usuBusiness.ObterUsuario(usuario).Item1;
             if (usu != null)
             {
                 return usu;

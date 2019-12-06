@@ -1,0 +1,753 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Web Flat Gui ui kit Flat Bootstrap Responsive  Website Template | Home :: w3layouts</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all">
+<!-- Custom Theme files -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Storage ui kit Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<link href='//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'></head>
+<script type="text/javascript" src="js/Chart.js"></script>
+<!----Calender -------->
+  <link rel="stylesheet" href="css/clndr.css" type="text/css" />
+  <script src="js/underscore-min.js"></script>
+  <script src= "js/moment-2.2.1.js"></script>
+  <script src="js/clndr.js"></script>
+  <script src="js/site.js"></script>
+<!----End Calender -------->
+<!-- start equalizer -->		  
+<link href="css/jquery-ui.css" rel="stylesheet" type="text/css" media="all" />
+<script src="js/jquery-ui.min.js"></script>
+<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+<script>
+$(function() {
+	 
+	    $( "#eq > span" ).each(function() {	   
+	      var value = parseInt( $( this ).text(), 10 );
+	      $( this ).empty().slider({
+	        value: value,
+	        range: "min",
+	        animate: true,
+	        orientation: "vertical"
+	      });
+	    });
+	  });
+</script>
+<script>
+(function($){
+	$.fn.percentPie = function(options){
+
+		var settings = $.extend({
+			width: 100,
+			trackColor: "EEEEEE",
+			barColor: "777777",
+			barWeight: 30,
+			startPercent: 0,
+			endPercent: 1,
+			fps: 60
+		}, options);
+
+		this.css({
+			width: settings.width,
+			height: settings.width
+		});
+
+		var	that = this,
+			hoverPolice = false,
+			canvasWidth = settings.width,
+			canvasHeight = canvasWidth,
+			id = $('canvas').length,
+			canvasElement = $('<canvas id="'+ id +'" width="' + canvasWidth + '" height="' + canvasHeight + '"></canvas>'),
+			canvas = canvasElement.get(0).getContext("2d"),
+			centerX = canvasWidth/2,
+			centerY = canvasHeight/2,
+			radius = settings.width/2 - settings.barWeight/2;
+			counterClockwise = false,
+			fps = 1000 / settings.fps,
+			update = .01;
+			this.angle = settings.startPercent;
+
+		this.drawArc = function(startAngle, percentFilled, color){
+			var drawingArc = true;
+			canvas.beginPath();
+			canvas.arc(centerX, centerY, radius, (Math.PI/180)*(startAngle * 360 - 90), (Math.PI/180)*(percentFilled * 360 - 90), counterClockwise);
+			canvas.strokeStyle = color;
+			canvas.lineWidth = settings.barWeight;
+			canvas.stroke();
+			drawingArc = false;
+		}
+
+		this.fillChart = function(stop){
+			var loop = setInterval(function(){
+				hoverPolice = true;
+				canvas.clearRect(0, 0, canvasWidth, canvasHeight);
+
+				that.drawArc(0, 360, settings.trackColor);
+				that.angle += update;
+				that.drawArc(settings.startPercent, that.angle, settings.barColor);
+
+				if(that.angle > stop){
+					clearInterval(loop);
+					hoverPolice = false;
+				}
+			}, fps);
+		}
+
+		this.mouseover(function(){
+			if(hoverPolice == false){
+				that.angle = settings.startPercent;
+				that.fillChart(settings.endPercent);
+			}
+		});
+
+		this.fillChart(settings.endPercent);
+		this.append(canvasElement);
+		return this;
+	}
+}(jQuery));
+
+$(document).ready(function() {
+
+	$('.google').percentPie({
+		width: 100,
+		trackColor: "444444",
+		barColor: "71CF97",
+		barWeight: 20,
+		endPercent: .9,
+		fps: 60
+	});
+  
+  $('.moz').percentPie({
+		width: 100,
+		trackColor: "444444",
+		barColor: "2EB0E2",
+		barWeight: 20,
+		endPercent: .75,
+		fps: 60
+	});
+  
+  $('.safari').percentPie({
+		width: 100,
+		trackColor: "444444",
+		barColor: "#e51937",
+		barWeight: 20,
+		endPercent: .5,
+		fps: 60
+	});
+    
+});
+</script>
+<!----video -------->	
+<link href="css/jplayer.blue.monday.min.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+$(document).ready(function(){
+
+	$("#jquery_jplayer_1").jPlayer({
+		ready: function () {
+			$(this).jPlayer("setMedia", {
+				title: "Big Buck Bunny",
+				m4v: "http://www.jplayer.org/video/m4v/Big_Buck_Bunny_Trailer.m4v",
+				poster: "http://www.jplayer.org/video/poster/Big_Buck_Bunny_Trailer_480x270.png"
+			});
+		},
+		swfPath: "../../dist/jplayer",
+		supplied: "m4v",
+		size: {
+			width: "475px",
+			height: "250px",
+			cssClass: "jp-video-360p"
+		},
+		useStateClassSkin: true,
+		autoBlur: false,
+		smoothPlayBar: true,
+		keyEnabled: true,
+		remainingDuration: true,
+		toggleDuration: true
+	});
+});
+//]]>
+</script>
+<!----//video -------->
+<body>
+	<!---header--->
+	<div class="header-section">
+		<div class="container">
+			<div class="logo">
+				<a href="index.html" class="logo-content"><h1>Web Flat Gui</h1></a>
+			</div>
+		</div>
+	</div>
+	<!---header--->
+		<!---content--->
+			<div class="header-bottom">
+				<div class="container">
+					<div class="main-grids">
+						<div class="col-md-5 main-grid">
+							<div class="beautiful">
+								<img src="images/p1.jpg" class="img-responsive" alt="">
+								<h3>beautiful and inspiring workspaces</h3>
+									<p class="beaut-link">posted by <a href="#">Gisele Muller</a> on <span> Feb 09 ,2015 </span></p>
+									<p class="beaut-link1">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage. </p>
+									<a href="#" class="button">read more</a>
+								<div class="beaut-bottoms">
+									<div class="col-md-3 beaut-grid">
+										<p><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> 9752</p>
+									</div>
+									<div class="col-md-3 beaut-grid">
+										<p><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 125</p>
+									</div>
+									<div class="col-md-3 beaut-grid">
+										<p><span class="glyphicon glyphicon-star" aria-hidden="true"></span> 103</p>
+									</div>
+									<div class="col-md-3 beaut-grid">
+										<p><span class="glyphicon glyphicon-download" aria-hidden="true"></span> 95</p>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+								<div class="clients">
+									<h4>client</h4>
+									<div class="client-grids">
+									<div class="col-md-3 client-grid">
+										<img src="images/c1.jpg" alt=""/>
+									</div>
+									<div class="col-md-3 client-grid">
+									<img src="images/c2.jpg" alt=""/>
+									</div>
+									<div class="col-md-3 client-grid">
+									<img src="images/c3.jpg" alt=""/>
+									</div>
+									<div class="col-md-3 client-grid">
+									<img src="images/c1.jpg" alt=""/>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								</div>
+							<div class="diagram">
+									<canvas id="canvas" height="150" width="150"> </canvas>
+									<h4>2496</h4> 
+												
+							</div>
+								<script>
+							var doughnutData = [
+								{
+									value: 80,
+									color:"#82ca9c"
+								},
+								{
+									value : 20,
+									color : "#21b8c6"
+								},							
+													
+							];				
+							var myDoughnut = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(doughnutData);					
+							</script>
+							<div class="news-grids">
+								<div class="col-md-7 new-grid">
+									<div class="news">
+										<div class="new1">
+											<h4>news</h4>
+										</div>
+										<div class="new2">
+											<a href="#">view all</a>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="new-bottom">
+										<div class="new-bottom1">
+											<img src="images/n3.png" class="img-responsive" alt="">
+										</div>
+										<div class="new-bottom2">
+											<h5>21 inspiring plan website designs.</h5>
+											<p>posted on <span>fed 21 2013</span></p>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="new-bottom new3">
+										<div class="new-bottom1">
+											<img src="images/n2.png" class="img-responsive" alt="">
+										</div>
+										<div class="new-bottom2">
+											<h5>the benefits of working on freelance projects.</h5>
+											<p>posted on <span>fed 21 2013</span></p>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="new-bottom">
+										<div class="new-bottom1">
+											<img src="images/n3.png" class="img-responsive" alt="">
+										</div>
+										<div class="new-bottom2">
+											<h5>the flexible web.</h5>
+											<p>posted on <span>fed 21 2013</span></p>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+								<!-- start equalizer -->
+								<div class="col-md-5 wrp-eq cf">
+										<div id="eq">				
+											<span>25</span>				
+											<span>75</span>				
+											<span>35</span>						
+									</div>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<!-- start equalizer -->
+							<div class="video">
+								<div id="jp_container_1" class="jp-video jp-video-360p" role="application" aria-label="media player">
+								<div class="jp-type-single">
+								<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+								<div class="jp-gui">
+								<div class="jp-video-play">
+									<button class="jp-video-play-icon" role="button" tabindex="0">play</button>
+								</div>
+								<div class="jp-interface">
+									<div class="jp-progress">
+										<div class="jp-seek-bar">
+											<div class="jp-play-bar"></div>
+										</div>
+									</div>
+									<div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+									<div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+									<div class="jp-controls-holder">
+										<div class="jp-controls">
+											<button class="jp-play" role="button" tabindex="0">play</button>
+											<button class="jp-stop" role="button" tabindex="0">stop</button>
+										</div>
+										<div class="jp-volume-controls">
+											<button class="jp-mute" role="button" tabindex="0">mute</button>
+											<button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+											<div class="jp-volume-bar">
+												<div class="jp-volume-bar-value"></div>
+											</div>
+										</div>
+										<div class="jp-toggles">
+											<button class="jp-repeat" role="button" tabindex="0">repeat</button>
+											<button class="jp-full-screen" role="button" tabindex="0">full screen</button>
+										</div>
+									</div>
+									
+								</div>
+								</div>
+								<div class="jp-no-solution">
+									<span>Update Required</span>
+									To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+								</div>
+								</div>
+							</div>
+							</div>
+						</div>
+						<div class="col-md-7 main-grid1">
+							<div class="russell-section">
+							<div class="crowe">
+								<div class="user">
+									<div class="user1">
+									<img src="images/user.png" class="img-responsive" alt="">
+									</div>
+									<div class="user2">
+										<h4>russell crowe</h4>
+									<ul>
+										<li><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> wellington, New Zealand</li>
+										<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><a href="mailto:example@mail.com">example@mail.com</a> </li>
+										<li><span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>russell crowe </li>
+									</ul>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+									<div class="flowers">
+										<div class="col-md-4 flower-grid">
+											<h5>10,113</h5>
+											<p>followers</p>
+										</div>
+										<div class="col-md-4 flower-grid">
+											<h5>947</h5>
+											<p>following</p>
+										</div>
+										<div class="col-md-4 flower-grid">
+											<h5>630</h5>
+											<p>listed</p>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="search">
+										<div class="social-icon">
+										<a href="#"><i class="icon"></i></a>
+										<a href="#"><i class="icon1"></i></a>
+										<a href="#"><i class="icon2"></i></a>
+											</div>
+											<div class="search1">
+											<form>
+												<input type="serach" placeholder="search">
+												<input type="submit" value="">
+											</form>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+									<div class="contact">
+										<h4>contact form</h4>
+										<form>
+											<input type="text" placeholder="example@mail.com">
+											<input type="text" class="sub" placeholder="subject">
+											<textarea placeholder="message"></textarea>
+										</form>
+										<div class="enviar">
+										<form>
+											<div class="contact-check">
+												<p><input type="checkbox" checked>save a copy</p>
+											</div>
+											<div class="contact-enviar">
+												<input type="submit" value="Send">
+											</div>
+										</form>
+										<div class="clearfix"> </div>
+										</div>
+									</div>
+								</div>
+							<div class="calendra">
+								<div class="column_right_grid calender">
+									<div class="cal1"><div class="clndr"><div class="clndr-controls"><div class="clndr-control-button"><p class="clndr-previous-button">previous</p></div><div class="month">May 2015</div><div class="clndr-control-button rightalign"><p class="clndr-next-button">next</p></div></div><table class="clndr-table" border="0" cellspacing="0" cellpadding="0"><thead><tr class="header-days"><td class="header-day">S</td><td class="header-day">M</td><td class="header-day">T</td><td class="header-day">W</td><td class="header-day">T</td><td class="header-day">F</td><td class="header-day">S</td></tr></thead><tbody><tr><td class="day past adjacent-month last-month calendar-day-2015-04-26"><div class="day-contents">26</div></td><td class="day past adjacent-month last-month calendar-day-2015-04-27"><div class="day-contents">27</div></td><td class="day past adjacent-month last-month calendar-day-2015-04-28"><div class="day-contents">28</div></td><td class="day past adjacent-month last-month calendar-day-2015-04-29"><div class="day-contents">29</div></td><td class="day past adjacent-month last-month calendar-day-2015-04-30"><div class="day-contents">30</div></td><td class="day past calendar-day-2015-05-01"><div class="day-contents">1</div></td><td class="day past calendar-day-2015-05-02"><div class="day-contents">2</div></td></tr><tr><td class="day past calendar-day-2015-05-03"><div class="day-contents">3</div></td><td class="day past calendar-day-2015-05-04"><div class="day-contents">4</div></td><td class="day past calendar-day-2015-05-05"><div class="day-contents">5</div></td><td class="day past calendar-day-2015-05-06"><div class="day-contents">6</div></td><td class="day past calendar-day-2015-05-07"><div class="day-contents">7</div></td><td class="day past calendar-day-2015-05-08"><div class="day-contents">8</div></td><td class="day past calendar-day-2015-05-09"><div class="day-contents">9</div></td></tr><tr><td class="day past event calendar-day-2015-05-10"><div class="day-contents">10</div></td><td class="day past event calendar-day-2015-05-11"><div class="day-contents">11</div></td><td class="day past event calendar-day-2015-05-12"><div class="day-contents">12</div></td><td class="day past event calendar-day-2015-05-13"><div class="day-contents">13</div></td><td class="day today event calendar-day-2015-05-14"><div class="day-contents">14</div></td><td class="day calendar-day-2015-05-15"><div class="day-contents">15</div></td><td class="day calendar-day-2015-05-16"><div class="day-contents">16</div></td></tr><tr><td class="day calendar-day-2015-05-17"><div class="day-contents">17</div></td><td class="day calendar-day-2015-05-18"><div class="day-contents">18</div></td><td class="day calendar-day-2015-05-19"><div class="day-contents">19</div></td><td class="day calendar-day-2015-05-20"><div class="day-contents">20</div></td><td class="day event calendar-day-2015-05-21"><div class="day-contents">21</div></td><td class="day event calendar-day-2015-05-22"><div class="day-contents">22</div></td><td class="day event calendar-day-2015-05-23"><div class="day-contents">23</div></td></tr><tr><td class="day calendar-day-2015-05-24"><div class="day-contents">24</div></td><td class="day calendar-day-2015-05-25"><div class="day-contents">25</div></td><td class="day calendar-day-2015-05-26"><div class="day-contents">26</div></td><td class="day calendar-day-2015-05-27"><div class="day-contents">27</div></td><td class="day calendar-day-2015-05-28"><div class="day-contents">28</div></td><td class="day calendar-day-2015-05-29"><div class="day-contents">29</div></td><td class="day calendar-day-2015-05-30"><div class="day-contents">30</div></td></tr><tr><td class="day calendar-day-2015-05-31"><div class="day-contents">31</div></td><td class="day adjacent-month next-month calendar-day-2015-06-01"><div class="day-contents">1</div></td><td class="day adjacent-month next-month calendar-day-2015-06-02"><div class="day-contents">2</div></td><td class="day adjacent-month next-month calendar-day-2015-06-03"><div class="day-contents">3</div></td><td class="day adjacent-month next-month calendar-day-2015-06-04"><div class="day-contents">4</div></td><td class="day adjacent-month next-month calendar-day-2015-06-05"><div class="day-contents">5</div></td><td class="day adjacent-month next-month calendar-day-2015-06-06"><div class="day-contents">6</div></td></tr></tbody></table></div></div>
+								</div>
+								<div class="login-form">
+										<h4>log in</h4>
+										<form>
+									<input type="text" placeholder="user name">
+									<input type="password" class="pass" placeholder="password">
+									<input type="submit" value="login">
+									</form>
+										<p><a href="#">forgot password?</a></p>
+								</div>
+								 <form id="opts">
+									<input type="text" name="length" min="0" max="100" value="20"><br>
+									<input type="text" name="length" min="10" max="100" value="60"><br>
+									<input type="text" name="length" min="20" max="100" value="80"><br>
+									<input type="text" name="length" min="0" max="100" value="20"><br>
+									<input type="text" name="length" min="10" max="100" value="60"><br>
+									<input type="text" name="length" min="20" max="100" value="80"><br>
+								</form>
+									<link rel="stylesheet" type="text/css" href="css/fd-slider.css">
+									<script type="text/javascript" src="js/fd-slider.js"></script>
+									<script>
+								
+									$(document).ready(function(){
+										//-------row1-----//
+									  $(".tag1").click(function(){
+									  $(".tag1").hide();
+									  });
+									  $(".toogle2").click(function(){
+									  $(".toogle2").hide();
+									  });
+									  $(".tag2").click(function(){
+									  $(".tag2").hide();
+									  });
+									 
+									 //-------//row1-----//
+									 
+									});
+								
+								</script>
+							</div>	
+								<div class="clearfix"></div>
+							</div>
+								<div class="table-section">
+									<table class="timetable">
+									<thead>
+										<tr>
+											<th>id</th>
+											<th>name</th>
+											<th>age</th>
+											<th>department</th>
+											<th>position</th>
+											<th>address</th>
+										</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>jennifer</td>
+												<td>28</td>
+												<td>markeing</td>
+												<td>manager</td>
+												<td>max dought</td>
+											</tr>
+											<tr class="color1">
+												<td>2</td>
+												<td>jennifer</td>
+												<td>31</td>
+												<td>markeing</td>
+												<td>manager</td>
+												<td>vanderbit,10</td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td>plummer</td>
+												<td>28</td>
+												<td>markeing</td>
+												<td>manager</td>
+												<td>francis lewis 18a</td>
+											</tr>
+											<tr class="color">
+												<td>4</td>
+												<td>paul</td>
+												<td>33</td>
+												<td>markeing</td>
+												<td>manager</td>
+												<td>juan pablo,57</td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>jhon</td>
+												<td>35</td>
+												<td>markeing</td>
+												<td>manager</td>
+												<td>rivington street,104</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+									<div class="buttons">
+
+										<div class="arrows">
+											<a href="#"><i class="arrow1"></i></a>
+											<a href="#"><i class="arrow2"></i></a>
+											<a href="#"><i class="arrow3"></i></a>
+										</div>
+										<div class="arrows1">
+											<a href="#"><i class="arrow4"></i></a>
+											<a href="#"><i class="arrow5"></i></a>
+											<a href="#"><i class="arrow6"></i></a>
+										</div>
+										<div class="butt1">
+										<div class="radio-bottom">
+											<span>
+											  <input type="radio" id="radio1" name="radio" />
+											  <label for="radio1"><i></i></label>
+											</span>
+											<span>
+											 <span class="last-radio">
+											 <input type="radio" id="radio3" name="radio" checked=""/>
+											 <label for="radio3"><i></i></label>
+											</span>
+										</div>
+										<div class="radio-bottom">
+											<span>
+											  <input type="radio" id="radio4" name="radio1" />
+											  <label for="radio4"><i></i></label>
+												</span>	
+											<span class="last-radio">
+											 <input type="radio" id="radio6" name="radio1" checked=""/>
+											 <label for="radio6"><i></i></label>
+											</span>
+										</div>
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								<div class="gallery">
+									<h4>photo gallery</h4>
+									<div class="slider1">
+										<div class="arrival-grids">			 
+										 <ul id="flexiselDemo1">
+											 <li>
+												 <a href="#"><img src="images/n1.jpg" alt=""/>
+												 </a>
+											 </li>
+											 <li>
+													<a href="#"><img src="images/n2.jpg" alt=""/>
+												 </a>
+											 </li>
+											 <li>
+												  <a href="#"><img src="images/n3.jpg" alt=""/>
+												 </a>
+											 </li>
+											 <li>
+												  <a href="#"><img src="images/n1.jpg" alt=""/>
+												 </a>
+											 </li>
+											 <li>
+												  <a href="#"><img src="images/n2.jpg" alt=""/>
+												 </a>
+											 </li>
+											 <li>
+												  <a href="#"><img src="images/n3.jpg" alt=""/>
+												 </a>
+											 </li>
+											</ul>
+											<script type="text/javascript">
+											 $(window).load(function() {			
+											  $("#flexiselDemo1").flexisel({
+												visibleItems: 3,
+												animationSpeed: 1000,
+												autoPlay: true,
+												autoPlaySpeed: 3000,    		
+												pauseOnHover:true,
+												enableResponsiveBreakpoints: true,
+												responsiveBreakpoints: { 
+													portrait: { 
+														changePoint:480,
+														visibleItems: 1
+													}, 
+													landscape: { 
+														changePoint:640,
+														visibleItems: 2
+													},
+													tablet: { 
+														changePoint:768,
+														visibleItems: 3
+													}
+												}
+											});
+											});
+											</script>
+											<script type="text/javascript" src="js/jquery.flexisel.js"></script>			 
+										</div>
+									</div>
+								</div>
+							</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="main-bottoms">
+						<div class="col-md-4 main-bottom">
+							<div class="main-top">
+								<div class="main1">
+									<h4>friends</h4>
+								</div>
+								<div class="main2">
+									<p>8</p>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="main-tops">
+							<div class="main-top1">
+								<div class="col-md-3 main-top2">
+									<a href="#"><img src="images/i.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i1.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i2.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="main-top1 top33">
+								<div class="col-md-3 main-top2">
+									<a href="#"><img src="images/i1.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i2.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i1.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="main-top1">
+								<div class="col-md-3 main-top2">
+									<a href="#"><img src="images/i2.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i1.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="col-md-3 main-top2">
+								<a href="#"><img src="images/i.jpg" class="img-responsive" alt=""></a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							</div>
+						</div>
+						<div class="col-md-4 main-bottom">
+						<div class="main-top">
+								<div class="main1">
+									<h4>tags cloud</h4>
+								</div>
+								<div class="main3">
+									<a href="#">view all</a>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="main-maddile">
+							<ul>
+								<li><a href="#">morbi lacinia</a></li>
+								<li><a href="#">pellentesque</a></li>
+								<li><a href="#">vivamus</a></li>
+								<li><a href="#"> aliqum neque</a></li>
+								<li><a href="#">lacus</a></li>
+								<li><a href="#">morbi lacinia</a></li>
+								<li><a href="#">pellentesque</a></li>
+								<li><a href="#">aliqum neque</a></li>
+								<li><a href="#">lacus</a></li>
+								<li><a href="#">vivamus</a></li>
+								<li><a href="#">aliqum neque</a></li>
+								<li><a href="#">vivamus</a></li>
+								<li><a href="#">morbi lacinia</a></li>
+								<li><a href="#">pellentesque</a></li>
+							</ul>
+						</div>
+						</div>
+						<div class="col-md-4 main-bottom">
+						<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+						<ul id="myTab" class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active"><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">Web Design</a></li>
+							<li role="presentation"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">Ui Design</a></li>
+							<li role="presentation"><a href="#user" role="tab" id="user-tab" data-toggle="tab" aria-controls="user">Print Design</a></li>
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="home" aria-labelledby="home-tab">
+								<p class="tab1">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor</p>
+								<p class="tab2">williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
+								<a href="#" class="but">This is a tooltip</a>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab">
+								<p class="tab1">Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.qui irure terry richardson ex squid.loko farm-to-table craft beer twee.</p>
+							<p class="tab2">Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.loko farm-to-table craft beerex squid.</p>
+							<a href="#" class="but">This is a tooltip</a>
+							</div>
+							<div role="tabpanel" class="tab-pane fade" id="user" aria-labelledby="user-tab">
+								<p class="tab1">williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
+								<p class="tab2">Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.loko farm-to-table craft beer twee.loko farm-to-table craft beer twee.</p>
+								<a href="#" class="but">This is a tooltip</a>
+							</div>
+						</div>
+					</div>
+
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<!--copy-->
+					<div class="copy-section">
+						
+							<p>&copy; 2016 Web Flat Gui ui kit. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
+						
+					</div>
+				<!--copy-->
+
+				</div>
+			</div>
+		<!---content--->
+</body>
+</html>

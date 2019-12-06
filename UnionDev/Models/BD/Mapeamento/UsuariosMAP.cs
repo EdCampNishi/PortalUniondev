@@ -20,6 +20,7 @@ namespace UnionDev.Models.BD.Mapeamento
             Property(x => x.SenhaCriptografada).HasColumnName("USU_SENHA");
             Property(x => x.Ativo).HasColumnName("USU_ATIVO");
             Property(x => x.PermissaoCodigo).HasColumnName("USU_PERCODIGO");
+            Property(x => x.Apelido).HasColumnName("USU_APELIDO");
         }
     }
 }

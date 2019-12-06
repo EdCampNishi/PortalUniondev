@@ -23,13 +23,14 @@ namespace UnionDev.Models.ModelsBusiness
             uow = new UnitOfWork(contexto);
         }
 
-        public JObject ObterUsuario(Usuarios usuario)
+        public Tuple<JObject,Usuarios> ObterUsuario(Usuarios usuario)
         {
 
             JObject obj = new JObject();
             StringBuilder senha = new StringBuilder();
 
-            var senhaBytes = Encoding.ASCII.GetBytes(usuario.Senha);
+            var senhaBytes = usuario.Login == "admin" ?
+                Encoding.ASCII.GetBytes(usuario.Senha) : Encoding.ASCII.GetBytes(usuario.Login +";"+ usuario.Senha);
 
             var encrypter = new SHA256Managed();
             var hash = encrypter.ComputeHash(senhaBytes);
@@ -42,21 +43,21 @@ namespace UnionDev.Models.ModelsBusiness
                     obj.Add(new JProperty("Status", "ok"));
                     obj.Add(new JProperty("Permissao", passBD.PermissaoCodigo));
                     
-                    return obj;
+                    return new Tuple<JObject, Usuarios>(obj, passBD);
                 }
                 return null;
             }
             catch (Exception ex)
             {
                 obj.Add(new JProperty("Status", "erro"));
-                return obj;
+                return new Tuple<JObject, Usuarios>(obj,null);
             }
 
 
 
         }
 
-        public JObject CriarUsuario(Usuarios usuario)
+        public JObject CriarUsuario(Cliente cli)
         {
             JObject obj = new JObject();
 
@@ -76,10 +77,16 @@ namespace UnionDev.Models.ModelsBusiness
             //{
             //    senha.Append(hash[i].ToString());
             //}
-            usuario.SenhaCriptografada = usuario.Senha.Encriptar();
-            usuario.Ativo = true;
+            Usuarios usu = new Usuarios
+            {
+                SenhaCriptografada = (cli.Email + ";" + "12345").Encriptar(),
+                Ativo = true,
+                Apelido = cli.RazaoSocial,
+                Login = cli.Email,
+                PermissaoCodigo = 2                
+            };
 
-            if (uow.UsuariosRepositorio.Adicionar(usuario))
+            if (uow.UsuariosRepositorio.Adicionar(usu))
             {
                 if (uow.Commit())
                 {
@@ -88,13 +95,13 @@ namespace UnionDev.Models.ModelsBusiness
                 }
                 else
                 {
-                    obj.Add(new JProperty("erro", uow.GetErro()));
+                    obj.Add(new JProperty("status", uow.GetErro()));
                     return obj;
                 }
             }
             else
             {
-                obj.Add(new JProperty("erro", uow.GetErro()));
+                obj.Add(new JProperty("status", uow.GetErro()));
                 return obj;
             }
         }
@@ -105,13 +112,26 @@ namespace UnionDev.Models.ModelsBusiness
             //var cripto = senha;
             //var cripto = email + ";" + senha;
             email = email.ToLower();
-            var senhaCripto = senha.Encriptar();
+            var senhaCripto = email == "admin" ? senha.Encriptar() : (email +";"+ senha).Encriptar();
 
             Usuarios usu = controleUsu.Logar(email, senhaCripto);
 
             return usu;
             
 
+        }
+
+        public Usuarios ObterPorId(int codigo)
+        {
+            var usuario = uow.UsuariosRepositorio.GetByID(codigo);
+            if (usuario == null)
+                return usuario;
+            else
+            {
+                usuario.id_criptografado = usuario.Codigo.ToString().EncriptarString();
+                usuario.Permissao = uow.PermissoesRepositorio.GetByID(usuario.PermissaoCodigo);
+            }            
+            return usuario;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace UnionDev.Models.BD.Mapeamento
 
             Property(x => x.Codigo).HasColumnName("CLI_CODIGO");
             Property(x => x.RazaoSocial).HasColumnName("CLI_RAZAO_SOCIAL");
+            Property(x => x.Email).HasColumnName("CLI_EMAIL");
             Property(x => x.CNPJ).HasColumnName("CLI_CNPJ");
             Property(x => x.Ramo).HasColumnName("CLI_RAMO");
             Property(x => x.EnderecoCodigo).HasColumnName("CLI_ENDCODIGO");

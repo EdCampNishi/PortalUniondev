@@ -36,7 +36,7 @@
                             <tr class="gradeU">
                                 <td data-title="Nome">@agendamento.NomeCandidato</td>
                                 <td data-title="Horário">@agendamento.HoraInicio</td>
-                                <td data-title="Data">@agendamento.Data</td>
+                                <td data-title="Data">@agendamento.Data.ToString("dd/MM/yyyy")</td>
 
                                 <td data-title="Acao">
                                     <button class="btn btn-primary" onclick="Remover(@agendamento.Codigo)">Deletar</button>

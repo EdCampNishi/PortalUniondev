@@ -2,32 +2,49 @@
 <style>
 
     .sidenav {
-        height: 78%;
+        height: 76%;
         width: 230px;
         position: fixed;
         z-index: 1;
         top: 100px;
         left: 0;
-        background-color: #111;
+        background-color: #4e0202;
         overflow-x: hidden;
-        padding-top: 8px;
+        padding-top: 6px;
         margin-right: 5px;
     }
 
         .sidenav a {
-            height: 53px;
+            height: 51px;
             line-height: 22px;
-            padding: 12px 8px 6px 25px;
+            padding: 12px 8px 8px 25px;
             text-decoration: none;
             font-size: 15px;
             color: #818181;
+            border: 1px solid #350101;
             display: block;
+            transition: all .2s ease-in-out;
+            background: linear-gradient(to right,#350101,#4e0202);
         }
 
             .sidenav a:hover {
-                color: #f1f1f1;
-                background: #818181;
+                background: #272727;
+                transform: scale(1.1);
             }
+        .sidenav span {
+            height: 51px;
+            line-height: 22px;
+            padding: 13px 12px 8px 14px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bolder;
+            text-align: center;
+            color: #818181;
+            border: none;
+            display: block;
+            background: linear-gradient(to right,#1e0000,#2a0000);
+        }
+
 
     .main {
         margin-left: 160px; /* Same as the width of the sidenav */
@@ -38,13 +55,11 @@
 
 
 <nav class="sidenav">
-    <a href="#">Menu <i class=" fa-angle-down"></i></a>
+    <span>Menu <i class="fa fa-id-badge"></i></span>
     <a href="/Admin/PainelControleAdmin">Painel de Controle</a>
     <a href="#" onclick="Agenda()">Agenda</a>
     <a href="#" onclick="CadastroCliente()">Cadastro de Clientes</a>
     <a href="#" onclick="BancoClientes()">Banco de Clientes</a>
-    <a href="#" onclick="BancoCandidatos()">Banco de Candidatos</a>
-    <a href="#">Controle de Atendimentos</a>
-    <a href="#" onclick="TelaRelatorio()">Relatórios</a>
-    <a href="/Admin/AjudaAdmin">Ajuda</a>
+    @*<a href="#" onclick="TelaRelatorio()">Relatórios</a>*@
+
 </nav>

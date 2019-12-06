@@ -23,6 +23,8 @@ namespace UnionDev.Models.ModelsBusiness
         {
             JObject obj = new JObject();
 
+            ClienteBusiness cliBusiness = new ClienteBusiness();
+
             if (uow.CandidatosRepositorio.Adicionar(candidato))
             {
                 if (uow.Commit())

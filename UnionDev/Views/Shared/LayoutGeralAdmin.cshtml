@@ -6,12 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="~/styles/bootstrap.css">
     <link rel="stylesheet" href="~/styles/styles.css">
+    <script src="~/Scripts/jsAguarde.js"></script>
+
+
+
+
 
     @{
         FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(Request.Cookies["nomePortal"].Value);
         var nome = ticket.UserData;
+        FormsAuthenticationTicket ticket2 = FormsAuthentication.Decrypt(Request.Cookies["permissao"].Value);
+        var permissao = ticket2.UserData;
+
     }
 
     <title>CEAP Gestão de Pessoas</title>
@@ -46,7 +53,14 @@
 
         <!-- Menu Lateral-->
         <div class="col-md-3" style="position: absolute; left:0px; width:200px;">
-            @Html.Partial("~/Views/Menu/LayoutMenu.cshtml")
+            @if (@permissao == "1")
+            {
+                @Html.Partial("~/Views/Menu/LayoutMenu.cshtml")
+            }
+            else
+            {
+                @Html.Partial("~/Views/Menu/LayoutMenuCliente.cshtml")
+            }
         </div>
 
         <!-- Conteúdo-->
@@ -57,15 +71,19 @@
     </div>
 
     @*<footer style="margin-left:300px;">
-        <p>Criado por: Uniondev</p>
-        <p>Contato: impuniondev@gmail.com</p>
-    </footer>*@
+            <p>Criado por: Uniondev</p>
+            <p>Contato: impuniondev@gmail.com</p>
+        </footer>*@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="~/Content/SweetAlert2/src/sweetAlert22.js"></script>    
+    <link href="~/Content/vendors/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+
+    <script src="~/Scripts/js/materialize.min.js"></script>
 </body>
 
 </html>
@@ -104,6 +122,21 @@
         window.location.href = "@Url.Action("Relatorio", "Admin")"
     }
 
+    function PainelDeControleCliente() {
+        window.location.href = "@Url.Action("PainelControleCliente", "Cliente")"
+    }
+
+    function AgendarExame() {
+        window.location.href = "@Url.Action("AgendaConsulta", "Cliente")"
+    }
+
+    function CadastrarCandidato() {
+        window.location.href = "@Url.Action("CadastroCandidatoCliente", "Cliente")"
+    }
+
+    function BancoCandidatosCliente() {
+        window.location.href = "@Url.Action("BancoCandidato", "Cliente")"
+    }
 
 
 </script>

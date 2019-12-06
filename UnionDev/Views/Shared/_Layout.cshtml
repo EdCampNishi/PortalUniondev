@@ -1,0 +1,309 @@
+﻿@model UnionDev.Models.ModelsBusiness.UsuariosBusiness
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+    <title>CEAP Gestão de Pessoas</title>
+
+    <!--css-->
+    <link href="~/Content/css/themes/fixed-menu/materialize.css" rel="stylesheet" />
+    <link href="~/Content/css/easy-responsive-tabs.css" rel="stylesheet" />
+    <link href="~/Content/css/themes/fixed-menu/style.css" rel="stylesheet" />
+    <link href="~/Content/css/custom/custom.css" rel="stylesheet" />
+    <link href="~/Content/Lightbox/lightbox.css" rel="stylesheet" />
+    <link href="~/Content/vendors/dropify/css/dropify.min.css" rel="stylesheet" />
+    <link href="~/Content/vendors/flag-icon/css/flag-icon.min.css" rel="stylesheet" />
+
+    <!--JQuery-->
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/js/easyResponsiveTabs.js"></script>
+    <script src="~/Scripts/jsAguarde.js"></script>
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            $('.modal').on('show.bs.modal', function () {
+                if ($(documento).height() > $(window).height()) {
+                    $('body').addClass("modal-open-noscroll");
+                }
+                else {
+                    $('body').removeClass("modal-open-noscroll");
+                }
+            })
+            $('.modal').on('hide.show.bs.modal', function () {
+                $('body').removeClass("modal-open-noscroll");
+            })
+        })
+
+        $(document).bind("ajaxSend", function () {
+            $('#load').empty();
+            $('#load').append('<div class="progress"><div class="indeterminate loadPrinciapl"></div></div>');
+        }).bind("ajaxComplete", function () {
+            $('#load').empty();
+        });
+        function ConverterNumeroParaReal(numero) {
+            var numero = numero.toFixed(2).split('.');
+            numero[0] = "R$ " + numero[0].split(/(?=(?:...)*$)/).join('.');
+            return numero.join(',');
+        }
+    </script>
+
+    <style type="text/css" rel="stylesheet">
+        body {
+            background: #f9f9f9;
+            height: 0;
+            width: 99%;
+        }
+
+        #container {
+            width: 940px;
+            margin: 0 auto;
+        }
+
+        footer {
+            width: 100%;
+            position: absolute;
+        }
+
+        @@media only screen and (max-width: 768px) {
+            #container {
+                width: 90%;
+                margin: 0 auto;
+            }
+        }
+
+        .progress .determinate {
+            background-color: #8bb770 !important;
+        }
+
+        table {
+            font-size: 13px;
+        }
+
+        .espheight {
+            font-size: 13px !important;
+            margin-top: -33px;
+        }
+
+        .labelCombo {
+            color: #9e9e9e;
+        }
+
+        .brand-sidebar .logo-wrapper {
+            line-height: 15px !important;
+        }
+
+        .brand-sidebar {
+            box-shadow: none;
+        }
+
+        ul.side-nav.leftside-navigation li:not(.no-padding).user-details {
+            background: blue;
+        }
+
+        .switch label input[type=checkbox]:checked + .lever {
+            background-color: #bad8ba;
+        }
+
+        input[type=checkbox]:checked:not(:disabled) ~ .lever:active::before, input[type=checkbox]:checked:not(:disabled).tabbed:focus ~ .lever::before {
+            background-color: #bad8ba96;
+        }
+
+        .switch label input[type=checkbox]:checked + .lever:after {
+            background-color: #43a047 !important;
+        }
+
+        .dropdown-content li > a, .dropdown-content li > span {
+            color: #05a8bd;
+        }
+
+        .swal2-popup .swal2-styled.swal2-confirm {
+            background-color: #4CAF50 !important;
+        }
+
+        .progress {
+            margin: 0;
+            background-color: transparent;
+        }
+
+            .progress .indeterminate {
+                background-color: white;
+            }
+
+            .progress .loadPrinciapl {
+                background-color: #06315a4a !important;
+            }
+
+        .imgQuadrada {
+            background-color: white;
+            border-radius: 0;
+            height: 100px;
+            object-fit: cover;
+            width: 100px;
+        }
+
+        .imgArredondadaAvatar {
+            margin-top: 11px;
+            background-color: #ddd !important;
+            border-radius: 100% !important;
+            height: 40px !important;
+            object-fit: cover !important;
+            width: 40px !important;
+            margin-bottom: -12px;
+        }
+
+        nav {
+            background-color: white;
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #F4F4F4;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            background: #F4F4F4;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #dad7d7;
+        }
+    </style>
+
+    @{
+        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(Request.Cookies["nomePortal"].Value);
+        var nome = ticket.UserData;
+        FormsAuthenticationTicket ticket2 = FormsAuthentication.Decrypt(Request.Cookies["idPortal"].Value);
+        int id = Int32.Parse(ticket2.UserData);
+
+        var usuBusiness = new UnionDev.Models.ModelsBusiness.UsuariosBusiness();
+        var usuario = usuBusiness.ObterPorId(id);
+    }
+
+
+</head>
+<body>
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <header id="header" class="page-topbar">
+        <!--Inicio header nav-->
+        <div class="navbar-fixed">
+            <nav class="navbar-color" style="background-color: #4e0202;">
+                <div id="load"></div>
+                <div class="nav-wrapper">
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a href="javscript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen">
+                                <i class="material-icons" style="color:#8bb770;"></i>
+                            </a>
+                        </li>
+                        <li style="margin-right:13px;">
+                            <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown">
+                                <span class="avatar-online">
+                                    @if (usuario == null)
+                                    {
+                                        <img src="#" alt="avatar" class="imgArredondadaAvatar" />
+                                    }
+                                    else
+                                    {
+                                        if (string.IsNullOrEmpty(usuario.Path_Imagem))
+                                        {
+                                            <img src="#" alt="avatar" class="imgArredondadaAvatar" />
+                                        }
+                                        else
+                                        {
+                                            <img src="@usuario.Path_Imagem" alt="avatar" class="imgArredondadaAvatar" />
+                                        }
+                                    }
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul id="notifications-dropdown" class="dropdown-content">
+                        <li>
+                            <h6 class="center">
+                                NOTIFICAÇÕES
+                            </h6>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#" class="grey-text text-darken-2">
+                                <span class="material-icons icon-bg-circle cyan small">recent_actors</span> Um novo Cliente foi cadastrado!
+                            </a>
+                            <time class="media-meta" datetime="2019-12-03T22:22:22+08:00">2 Horas atrás</time>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!--Conteúdo-->
+    <div id="main">
+        <div class="wrapper">
+            @if (usuario.PermissaoCodigo == 1)
+            {
+                @Html.Partial("~/Views/Shared/Menus/MenuLeft.cshtml", @usuario)
+            }
+            else
+            {
+                @Html.Partial("~/Views/Shared/Menus/MenuLeft.cshtml", @usuario)
+            }
+
+
+            <section id="content">
+                @RenderBody()
+            </section>
+        </div>
+    </div>
+    <br />
+    <br />
+    <footer class="page-footer" style="background-color:white">
+        <div class="footer-copyright" style="background-color:white">
+            <div class="container" style="font-size:14px">
+                <span style="color:black">
+                    Copyright ₢
+                    <script type="text/javascript">
+                        document.write(new Date().getFullYear());
+                    </script>
+                    Uniondev - Todos os direitos reservados.
+                </span>
+                <span class="right hide-on-small-only" style="color:black">Desenvolvido por Alunos Impacta</span>
+            </div>
+        </div>
+    </footer>
+
+    <link href="~/Content/vendors/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" />
+    <link href="~/Content/vendors/data-tables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/vendors/flag-icon/css/flag-icon.min.css" rel="stylesheet" />
+    <link href="~/Content/vendors/jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="~/Content/vendors/noUiSlider/nouislider.css" rel="stylesheet" />
+    <link href="~/Content/vendors/prism/prism.css" rel="stylesheet" />
+    <link href="~/Content/vendors/sweetalert/dist/sweetalert.css" rel="stylesheet" />
+
+    <script src="~/Scripts/js/materialize.min.js"></script>
+    <script src="~/Content/vendors/prism/prism.js"></script>
+    <script src="~/Content/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/Scripts/vendors/chartjs/chart.min.js"></script>
+    <script src="~/Scripts/vendors/angular.min.js"></script>
+
+    <script src="~/Scripts/vendors/data-tables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/js/plugins.js"></script>
+    <script src="~/Scripts/js/custom-script.js"></script>
+
+    <script src="~/Content/SweetAlert2/src/sweetAlert22.js"></script>
+
+</body>
+</html>
+@RenderSection("scripts", required: false)

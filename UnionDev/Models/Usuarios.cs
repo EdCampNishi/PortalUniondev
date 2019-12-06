@@ -10,6 +10,8 @@ namespace UnionDev.Models
     public class Usuarios
     {
         public int Codigo { get; set; }
+        [NotMapped]
+        public string id_criptografado { get; set; }
         [Required]
         public string Login { get; set; }
         [NotMapped]
@@ -19,6 +21,10 @@ namespace UnionDev.Models
 
         public Permissao Permissao { get; set; }
         public int PermissaoCodigo { get; set; }
+
+        public string Apelido { get; set; }
+        [NotMapped]
+        public string Path_Imagem { get; set; }
 
     }
 }

@@ -1,8 +1,101 @@
-﻿
+﻿@*@model UnionDev.Models.Relatorio*@
+@model UnionDev.Models.Cliente
 @{
     ViewBag.Title = "Relatorio";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
     Layout = "~/Views/Shared/LayoutGeralAdmin.cshtml";
 }
 
-<h2>Relatorio</h2>
+<script src="~/Content/Bootstrap_Switch/js/bootstrap-switch.min.js"></script>
+<link href="~/Content/Bootstrap_Switch/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" />
+<link href="~/Content/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />
+<link href="~/Content/autocomplete_master/jquery.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/autocomplete_master/jquery.autocomplete.js"></script>
+
+
+
+<style>
+    input {
+        width: 100px;
+    }
+
+    .invisivel {
+        display: none;
+    }
+
+    .daterangepicker_start_input, .daterangepicker_end_input {
+        display: none;
+    }
+</style>
+
+
+<form name="form0" id="form0" method="POST" onsubmit="">
+    <div class="row">
+        <div class="card-panel">
+            <div class="row">
+                <h4 class="header2"> Relatórios</h4>
+                <br />
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Cliente</label>
+                        <input type="hidden" id="txtcodigo" name="txtcodigo" data-val="true" />
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" name="txtnome" id="txtnome" class="form-control" data-val="true" data-val-required="Cliente é obrigatório" />
+                            <span class="field-validation-valid help-block position-absolute" data-valmsg-replace="true" data-valmsg-for="txtcodigo"></span>
+                        </div>
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-success" type="button" onclick="GerarRaltorio()" style="background: #4e0202;">Gerar</button>
+</form>
+
+
+
+
+<script>
+
+    $(document).ready(function () {
+        $("#txtnome").autocomplete({
+
+            valueKey: 'valor',
+            replaceAccentsForRemote: false,
+            source: [{
+
+
+                url: "@Url.Action("AutoCompleta", "Admin")" + "?term=%QUERY%",
+                type: 'remote',
+                ajax: {
+                    dataType: 'json',
+                    global: false
+                },
+
+                getTitle: function (item) {
+
+                    return item['valor']
+                },
+                getValue: function (item) {
+
+                    return item['valor']
+                }
+            }
+
+            ],
+
+        }).on('selected.xdsoft', function (e, datum) {
+
+            $("#txtcodigo").val(datum.codigo);
+        });
+
+
+
+    });
+
+
+
+</script>
+
+
 

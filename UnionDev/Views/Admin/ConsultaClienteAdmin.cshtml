@@ -1,11 +1,11 @@
-﻿
-@model IList<UnionDev.Models.Cliente>
-
+﻿@model IList<UnionDev.Models.Cliente>
 @{
     ViewBag.Title = "ConsultaClienteAdmin";
     Layout = "~/Views/Shared/LayoutGeralAdmin.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<link href="~/Content/autocomplete_master/jquery.autocomplete.css" rel="stylesheet" />
+<script src="~/Content/autocomplete_master/jquery.autocomplete.js"></script>
 <div>
 
     <h3>Clientes</h3>
@@ -13,9 +13,9 @@
     <form class="form-horizontal" name="form" id="form">
 
         <div class="form-group">
-            <label for="cliente">Cliente</label>
+            <label for="cliente"></label>
             <div class="input-group">
-                <input type="text" class="form-control col-lg-8" name="cliente" id="cliente" placeholder="Cliente">
+                <input type="text" class="form-control col-lg-8" name="txtcliente" id="txtcliente" placeholder="Pesquisa">
                 <button type="button" class="btn btn-primary pull-right" onclick="Consultar()" style="margin-left:5px;">Consultar</button>
             </div>
         </div>
@@ -42,7 +42,7 @@
                                     <td data-title="CNPJ">@cliente.CNPJ</td>
                                     <td data-title="RAMO">@cliente.Ramo</td>
                                     <td data-title="Ação">
-                                        <button class="btn btn-primary" onclick="Remover(@cliente.Codigo)">Deletar</button>
+                                        <button class="btn btn-primary" onclick="Remover(@cliente.Codigo)" style="margin-right:8px;">Deletar</button>
                                         <button type="button" class="btn btn-primary" onclick="AbrirModal(@cliente.Codigo)">Editar</button>
                                     </td>
                                 </tr>
@@ -95,6 +95,37 @@
 
 <script>
 
+
+    $("#txtcliente").autocomplete({
+
+            valueKey: 'valor',
+            replaceAccentsForRemote: false,
+            source: [{
+
+
+                url: "@Url.Action("AutoCompleta", "Admin")" + "?term=%QUERY%",
+                type: 'remote',
+                ajax: {
+                    dataType: 'json',
+                    global: false
+                },
+
+                getTitle: function (item) {
+
+                    return item['valor']
+                },
+                getValue: function (item) {
+
+                    return item['valor']
+                }
+            }
+
+            ],
+
+        }).on('selected.xdsoft', function (e, datum) {
+
+            $("#txtcodigo").val(datum.codigo);
+        });
 
     function Remover(cod) {
 

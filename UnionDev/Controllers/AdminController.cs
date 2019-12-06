@@ -73,12 +73,20 @@ namespace UnionDev.Controllers
         }
 
         [HttpPost]
-        public void SalvarCliente(Cliente cliente, Endereco endereco)
+        public ActionResult SalvarCliente(Cliente cliente, Endereco endereco)
         {
             cliente.Endereco = endereco;
             ClienteBusiness cliBusiness = new ClienteBusiness();
             JObject cli = cliBusiness.CadastrarCliente(cliente);
-            ConsultaClienteAdmin();
+            if (cli["status"].ToString() == "ok")
+            {
+                return RedirectToAction("ConsultaClienteAdmin", "Admin");
+            }
+            else
+            {
+                ModelState.AddModelError("Erro:", "Não foi possível salvar o Cliente.");
+                return RedirectToAction("ConsultaClienteAdmin");
+            }
         }
 
         [HttpPost]
@@ -134,7 +142,19 @@ namespace UnionDev.Controllers
 
         public ActionResult Relatorio()
         {
+            AgendamentoBusiness agBusiness = new AgendamentoBusiness();
+            ClienteBusiness cliBusiness = new ClienteBusiness();
+
+            ViewBag.ListaAgendamentos = agBusiness.ConsultaTodosAgendamentos();
             return View();
+        }
+
+        public string AutoCompleta()
+        {
+            ClienteBusiness cliBusiness = new ClienteBusiness();
+            string term = Request.QueryString["term"].ToString();
+
+            return cliBusiness.AutoCompletaCliente(term).ToString();
         }
 
     }
